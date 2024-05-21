@@ -1,17 +1,17 @@
-/gate/verbose Physic	10
-/gate/verbose Cuts	10
-/gate/verbose SD	10
-/gate/verbose Actions	10
-/gate/verbose Actor	10
-/gate/verbose Step	10
-/gate/verbose Error	10
-/gate/verbose Warning	10
-/gate/verbose Output	10
-/gate/verbose Beam	10
-/gate/verbose Volume	10
-/gate/verbose Image	10
-/gate/verbose Geometry	10
-/gate/verbose Core	10
+#/gate/verbose Physic	10
+#/gate/verbose Cuts	10
+#/gate/verbose SD	10
+#/gate/verbose Actions	10
+#/gate/verbose Actor	10
+#/gate/verbose Step	10
+/gate/verbose Error	1
+/gate/verbose Warning	1
+#/gate/verbose Output	10
+#/gate/verbose Beam	10
+#/gate/verbose Volume	10
+#/gate/verbose Image	10
+#/gate/verbose Geometry	10
+#/gate/verbose Core	10
 
 /run/verbose	1
 /event/verbose	1
