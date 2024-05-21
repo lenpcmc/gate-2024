@@ -28,12 +28,23 @@
 
 /gate/leadStop/daughters/name leadGap2
 /gate/leadStop/daughters/insert box
-/gate/leadGap2/geometry/setXLength  0.3 cm
-/gate/leadGap2/geometry/setYLength  0.3 cm
+/gate/leadGap2/geometry/setXLength  1 mm
+/gate/leadGap2/geometry/setYLength  1 mm
 /gate/leadGap2/geometry/setZLength  0.5 cm
 /gate/leadGap2/vis/setColor white
 /gate/leadGap2/setMaterial Air
 /gate/leadGap2/placement/setTranslation 0 0 -0.75 cm
+
+/gate/leadGap1/daughters/name strontiumSource
+/gate/leadGap1/daughters/insert cylinder
+/gate/strontiumSource/geometry/setRmin 0 mm
+/gate/strontiumSource/geometry/setRmax 2 mm
+/gate/strontiumSource/geometry/setHeight 2 mm
+/gate/strontiumSource/geometry/setPhiStart 0 deg
+/gate/strontiumSource/geometry/setDeltaPhi 360 deg
+/gate/strontiumSource/setMaterial Air
+/gate/strontiumSource/vis/setColor green
+/gate/strontiumSource/placement/setTranslation 0 0 -.4 cm
 
 ##### Running #####
 
