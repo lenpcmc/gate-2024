@@ -73,7 +73,7 @@
 #Radiation source
 /gate/source/addSource radSource
 /gate/source/radSource/gps/particle e- # Measure
-/gate/source/radSource/gps/energytype Mono # This works with Mono, I want strontium as the energytype though!
+/gate/source/radSource/gps/energytype Mono # This works with Mono, I want strontium as the energytype though! (If you fix that, delete following line)
 /gate/source/radSource/gps/monoenergy 511. keV
 /gate/source/radSource/gps/angtype iso
 /gate/source/radSource/gps/mintheta 90. deg
