@@ -16,12 +16,11 @@
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
 
-#Actors
-
-
 #Initialization
 /gate/geometry/rebuild
 /gate/run/initialize
+
+#Actors
 
 /control/execute visu.mac
 
