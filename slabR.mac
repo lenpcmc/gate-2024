@@ -1,3 +1,5 @@
+#Things to measure: scintillator height/radius/material
+
 ##################
 #    Preamble    #
 #                #
@@ -5,10 +7,10 @@
 /control/execute visu.mac
 /control/execute verbose.mac
 
-##################
-#  Configuring   #
-#                #
-##################
+###################
+#   Configuring   #
+#                 #
+###################
 
 # Create world
 /gate/geometry/setMaterialDatabase GateMaterials.db 
@@ -18,6 +20,21 @@
 /gate/world/setMaterial Air
 
 # Create Scintillating Slab
-/gate/world/daughters/name choiceScintillator
+/gate/world/daughters/name scintillator
 /gate/world/daughters/insert cylinder
-/gate/choiceScintillator/setMaterial
+/gate/scintillator/setMaterial ScintX #Scintillating material
+/gate/scintillator/setRmin 0 mm
+/gate/scintillator/setRmax 20 mm # Measure this every time please!
+/gate/scintillator/setheight 4 mm # Measure this every time please!
+/gate/scintillator/setPhiStart 0 deg
+/gate/scintillator/setDeltaPhi 360 deg
+
+# Create strontium source
+/gate/world/daughters/name radioactiveSource
+/gate/world/daughters/insert cylinder
+/gate/radioactiveSource/setMaterial Strontium-90
+/gate/radioactiveSource/setRmin 0 mm
+/gate/radioactiveSource/setRmax 1 mm
+/gate/radioactiveSource/setheight 1 mm
+/gate/radioactiveSource/setPhiStart 0 deg
+/gate/radioactiveSource/setDeltaPhi 360 deg
