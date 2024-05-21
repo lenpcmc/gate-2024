@@ -1,4 +1,5 @@
 #Headers
+#This was added within the Rain branch!
 
 /control/execute visu.mac
 /control/execute verbose.mac
@@ -55,8 +56,8 @@
 /gate/source/positronPalace/gps/angtype iso
 /gate/source/positronPalace/gps/mintheta 90. deg
 /gate/source/positronPalace/gps/maxtheta 90. deg
-/gate/source/positronPalace/gps/minphi 0. deg
-/gate/source/positronPalace/gps/maxphi 0. deg
+/gate/source/positronPalace/gps/minphi 90. deg
+/gate/source/positronPalace/gps/maxphi 90. deg
 
 /gate/source/positronPalace/attachTo gantry1
 
