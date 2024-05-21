@@ -1,0 +1,46 @@
+/control/execute visu.mac
+/control/execute verbose.mac
+
+/gate/geometry/setMaterialDatabase GateMaterials.db
+
+/gate/world/geometry/setXLength 0.1 m
+/gate/world/geometry/setYLength 0.1 m
+/gate/world/geometry/setZLength 0.1 m
+/gate/world/setMaterial Air
+
+/gate/world/daughters/name leadStop
+/gate/world/daughters/insert box
+/gate/leadStop/geometry/setXLength  2 cm
+/gate/leadStop/geometry/setYLength  2 cm
+/gate/leadStop/geometry/setZLength  2 cm
+/gate/leadStop/vis/setColor blue
+/gate/leadStop/setMaterial Lead
+/gate/leadStop/placement/setTranslation 0 0 1 cm
+
+/gate/leadStop/daughters/name leadGap1
+/gate/leadStop/daughters/insert box
+/gate/leadGap1/geometry/setXLength  1 cm
+/gate/leadGap1/geometry/setYLength  1 cm
+/gate/leadGap1/geometry/setZLength  1 cm
+/gate/leadGap1/vis/setColor white
+/gate/leadGap1/setMaterial Air
+#/gate/leadGap1/placement/setTranslation 0 0 1 cm
+
+/gate/leadStop/daughters/name leadGap2
+/gate/leadStop/daughters/insert box
+/gate/leadGap2/geometry/setXLength  0.3 cm
+/gate/leadGap2/geometry/setYLength  0.3 cm
+/gate/leadGap2/geometry/setZLength  0.5 cm
+/gate/leadGap2/vis/setColor white
+/gate/leadGap2/setMaterial Air
+/gate/leadGap2/placement/setTranslation 0 0 -0.75 cm
+
+##### Running #####
+
+/gate/physics/addPhysicsList emstandard 
+/gate/output/allowNoOutput
+
+/gate/run/initialize
+
+#/gate/application/setTotalNumberOfPrimaries 100
+#/gate/application/start

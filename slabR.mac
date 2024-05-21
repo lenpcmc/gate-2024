@@ -48,6 +48,7 @@
 ###############
 
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
 ##################
 #  Moving Parts  #
 #                #
@@ -58,11 +59,11 @@
 
 # Energy Deposition readout
 /gate/actor/addActor DoseActor edepReadout
-#/gate/actor/edepReadout/save slabROut.txt #Comment this one out if you don't want to record
+/gate/actor/edepReadout/save slabROut.txt #Comment this one out if you don't want to record
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo scintillator
-/gate/actor/edepReadout/setSize 0.1 0.1 0.1 m
-/gate/actor/edepReadout/setResolution 1 1 10
+/gate/actor/edepReadout/setSize 1000 1000 4 mm
+/gate/actor/edepReadout/setResolution 1 1 300
 /gate/actor/edepReadout/enableDose false
 /gate/actor/edepReadout/enableEdep true
 
@@ -83,5 +84,5 @@
 /gate/source/radSource/gps/direction  0 0 -1
 /gate/source/radSource/attachTo radioactiveSource
 
-/gate/application/setTotalNumberOfPrimaries 1000
+/gate/application/setTotalNumberOfPrimaries 3000
 /gate/application/start #Start er up!
