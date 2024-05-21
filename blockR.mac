@@ -1,0 +1,64 @@
+#Headers
+
+/control/execute visu.mac
+/control/execute verbose.mac
+
+#Geometries
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+/gate/world/geometry/setXLength 2 m
+/gate/world/geometry/setYLength 2 m
+/gate/world/geometry/setZLength 5 m
+/gate/world/setMaterial Air
+
+/gate/world/daughters/name favoriteDaughter
+/gate/world/daughters/insert box
+/gate/favoriteDaughter/geometry/setXLength 0.5 m 
+/gate/favoriteDaughter/geometry/setYLength 0.5 m 
+/gate/favoriteDaughter/geometry/setZLength 1 m 
+
+/gate/favoriteDaughter/vis/forceSolid
+/gate/favoriteDaughter/vis/setColor blue
+
+
+#/gate/favoriteDaughter/placement/setTranslation .01 .01 .01 m #This would in theory change the place of origin for favoriteDaughter
+
+/gate/favoriteDaughter/setMaterial Brain
+
+/gate/world/daughters/name gantry1
+/gate/world/daughters/insert cylinder
+/gate/gantry1/geometry/setRmin 0 m
+/gate/gantry1/geometry/setRmax 0.2 m
+/gate/gantry1/geometry/setHeight 0.5 m
+/gate/gantry1/geometry/setPhiStart 0. rad
+/gate/gantry1/geometry/setDeltaPhi 6.28 rad
+/gate/gantry1/placement/setThetaOfTranslation 90 deg #Rotates Gantry around x axis I think
+/gate/gantry1/placement/setTranslation 0 0 0.75 m #offsetting gantry from Brain Block
+/gate/gantry1/vis/setColor green
+/gate/gantry1/setMaterial Air
+
+#Physics
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+#Actors
+/gate/output/allowNoOutput
+
+#Initialization
+#/gate/geometry/rebuild
+/gate/run/initialize
+
+
+#Actors
+/gate/source/addSource positronPalace gps
+/gate/source/positronPalace/gps/particle e-
+/gate/source/positronPalace/gps/energytype Mono
+/gate/source/positronPalace/gps/monoenergy 511. keV
+/gate/source/positronPalace/gps/angtype iso
+/gate/source/positronPalace/gps/mintheta 90. deg
+/gate/source/positronPalace/gps/maxtheta 90. deg
+/gate/source/positronPalace/gps/minphi 0. deg
+/gate/source/positronPalace/gps/maxphi 0. deg
+
+/gate/source/positronPalace/attachTo gantry1
+
+/gate/application/setTotalNumberOfPrimaries 1000
+/gate/application/start
