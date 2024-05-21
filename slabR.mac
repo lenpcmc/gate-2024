@@ -58,7 +58,7 @@
 
 # Energy Deposition readout
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save slabROut.txt
+#/gate/actor/edepReadout/save slabROut.txt #Comment this one out if you don't want to record
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo scintillator
 /gate/actor/edepReadout/setSize 0.1 0.1 0.1 m
