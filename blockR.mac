@@ -58,7 +58,7 @@
 /gate/source/positronPalace/gps/maxtheta 90. deg
 /gate/source/positronPalace/gps/minphi 90. deg
 /gate/source/positronPalace/gps/maxphi 90. deg
-
+/gate/source/positronPalace/gps/direction  0 0 -1 #provides vector direction for gantry
 /gate/source/positronPalace/attachTo gantry1
 
 /gate/application/setTotalNumberOfPrimaries 1000
