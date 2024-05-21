@@ -47,10 +47,14 @@ Bismuth:    S= Bi  ; Z= 83. ; A= 208.98  g/mole
 Uranium:    S= U   ; Z= 92. ; A= 238.03  g/mole
 Europium:   S= Eu  ; Z= 63. ; A= 151.964 g/mole
 Gold:       S= Au  ; Z= 79  ; A= 197.0   g/mole
+Strontium:  S= Sr  ; Z= 38  ; A=  89.9  g/mole
 
 [Materials]
 Vacuum: d=0.000001 mg/cm3 ; n=1 
 	+el: name=Hydrogen ; n=1
+
+Strontium-90: d=2.64 g/cm3 ; n=1 ; state=solid
+	+el: name=Strontium ; n=1
 
 Aluminium: d=2.7 g/cm3 ; n=1 ; state=solid
 	+el: name=auto ; n=1
@@ -80,9 +84,6 @@ Lead: d=11.4 g/cm3 ; n=1 ; state=solid
 	+el: name=auto ; n=1
 
 Bismuth: d=9.75 g/cm3 ; n=1 ; state=solid
-	+el: name=auto ; n=1
-
-Strontium-90: d=2.64 g/cm3 ; n=1 ; state=solid
 	+el: name=auto ; n=1
 
 NaI: d=3.67 g/cm3; n=2;  state=solid
