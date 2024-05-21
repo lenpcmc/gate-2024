@@ -1,4 +1,4 @@
-#Things to measure: scintillator height/radius/material
+#Things to measure: scintillator height/radius/material, radioactive Source material, type of radiation (in radSource)
 
 ##################
 #    Preamble    #
@@ -33,7 +33,7 @@
 # Create strontium (or other) source
 /gate/world/daughters/name radioactiveSource
 /gate/world/daughters/insert cylinder
-/gate/radioactiveSource/setMaterial Strontium-90
+/gate/radioactiveSource/setMaterial Air #Can't have strontium cus it blows up :(
 /gate/radioactiveSource/geometry/setRmin 0 mm
 /gate/radioactiveSource/geometry/setRmax 1 mm
 /gate/radioactiveSource/geometry/setHeight 1 mm
@@ -48,17 +48,40 @@
 ###############
 
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
-
-/gate/output/allowNoOutput           #Is this right? I'm looking for edep along the scintillator
-
 ##################
 #  Moving Parts  #
 #                #
 ##################
 
-/gate/run/initialize
 
 # Actors
-#/gate/source/addSource radSource
+
+# Energy Deposition readout
+/gate/actor/addActor DoseActor edepReadout
+/gate/actor/edepReadout/save slabROut.txt
+/gate/actor/edepReadout/stepHitType random
+/gate/actor/edepReadout/attachTo scintillator
+/gate/actor/edepReadout/setSize 0.1 0.1 0.1 m
+/gate/actor/edepReadout/setResolution 1 1 10
+/gate/actor/edepReadout/enableDose false
+/gate/actor/edepReadout/enableEdep true
+
+/gate/run/initialize
+
+
+
+#Radiation source
+/gate/source/addSource radSource
+/gate/source/radSource/gps/particle e- # Measure
+/gate/source/radSource/gps/energytype Mono # This works with Mono, I want strontium as the energytype though!
+/gate/source/radSource/gps/monoenergy 511. keV
+/gate/source/radSource/gps/angtype iso
+/gate/source/radSource/gps/mintheta 90. deg
+/gate/source/radSource/gps/maxtheta 90. deg
+/gate/source/radSource/gps/minphi 90. deg
+/gate/source/radSource/gps/maxphi 90. deg
+/gate/source/radSource/gps/direction  0 0 -1
+/gate/source/radSource/attachTo radioactiveSource
+
 /gate/application/setTotalNumberOfPrimaries 1000
 /gate/application/start #Start er up!
