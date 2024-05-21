@@ -13,6 +13,6 @@
 #/gate/verbose Geometry	10
 #/gate/verbose Core	10
 
-/run/verbose	1
-/event/verbose	1
-/tracking/verbose	1
+#/run/verbose	1
+#/event/verbose	1
+#/tracking/verbose	1

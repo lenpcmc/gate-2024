@@ -1,0 +1,29 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength  m
+/gate/world/geometry/setYLength  m
+/gate/world/geometry/setZLength  m
+/gate/world/setMaterial Lithium
+
+/gate/world/daughters/name thing
+/gate/world/daughters/insert cylinder
+/gate//geometry/setXLength 0.5 m 
+/gate//geometry/setYLength 0.5 m 
+/gate//geometry/setZLength 1 m 
+
+#Physics
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+#Actors
+
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+/control/execute visu.mac
+
+/gate/application/setTotalNumberOfPrimaries 1000
+/gate/application/start
