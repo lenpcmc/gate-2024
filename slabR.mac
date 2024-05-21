@@ -42,9 +42,10 @@
 /gate/radioactiveSource/vis/setColor green
 /gate/radioactiveSource/placement/setTranslation 0 0 4 cm
 
-#############
-#Information #
-##############
+###############
+# Information #
+#             #
+###############
 
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
 
