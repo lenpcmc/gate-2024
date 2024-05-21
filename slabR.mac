@@ -1,0 +1,23 @@
+##################
+#    Preamble    #
+#                #
+##################
+/control/execute visu.mac
+/control/execute verbose.mac
+
+##################
+#  Configuring   #
+#                #
+##################
+
+# Create world
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+/gate/world/geometry/setXLength 1 m
+/gate/world/geometry/setYLength 1 m
+/gate/world/geometry/setZLength 1 m
+/gate/world/setMaterial Air
+
+# Create Scintillating Slab
+/gate/world/daughters/name choiceScintillator
+/gate/world/daughters/insert cylinder
+/gate/choiceScintillator/setMaterial
