@@ -1,0 +1,72 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength 1 m
+/gate/world/geometry/setYLength 1 m
+/gate/world/geometry/setZLength 1 m
+/gate/world/setMaterial Air
+
+/gate/world/daughters/name 
+/gate/world/daughters/systemType OpticalSystem
+/gate/world/daughters/insert cylinder
+
+
+##################################################################################################################################
+#OpticalSystem (detector)
+
+# Create the Optical Imaging system, which will yield a binary output of the projection data
+/gate/world/daughters/name OpticalSystem
+/gate/world/daughters/insert cylinder
+
+# Define the dimensions, position and material
+/gate/OpticalSystem/geometry/setRmin 0 cm
+/gate/OpticalSystem/geometry/setRmax 3.175 cm
+/gate/OpticalSystem/geometry/setHeight .635 cm
+/gate/OpticalSystem/geometry/setPhiStart 0 rad
+/gate/OpticalSystem/geometry/setDeltaPhi 6.28 rad
+/gate/OpticalSystem/placement/setTranslation 15. 0. 0. cm
+/gate/OpticalSystem/placement/setRotationAngle 90 deg
+/gate/OpticalSystem/placement/setRotationAxis 0 1 0
+/gate/OpticalSystem/setMaterial LYSO
+
+# Define pixelated detector:
+/gate/OpticalSystem/daughters/name crystal
+/gate/OpticalSystem/daughters/insert cylinder
+/gate/crystal/geometry/setRmin 0 cm
+/gate/crystal/geometry/setRmax 3.175 cm
+/gate/crystal/geometry/setHeight .635 cm
+/gate/crystal/setMaterial LYSO
+/gate/systems/OpticalSystem/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert cylinder
+/gate/pixel/geometry/setRmin 0 cm
+/gate/pixel/geometry/setRmax 3.175 cm
+/gate/pixel/geometry/setHeight .00635 cm
+/gate/pixel/setMaterial Air
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 100
+/gate/pixel/linear/setRepeatVector .00635 0 0 cm
+/gate/pixel/attachCrystalSD
+/gate/systems/OpticalSystem/pixel/attach pixel
+###########################################################################################################################################
+
+#Physics
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Actors
+/gate/source/addSource 
+/gate/source//gps/particle 
+/gate/source//gps/energytype Mono
+/gate/source//gps/monoenergy  MeV
+/gate/source//gps/direction 0 0 0
+
+/control/execute visu.mac
+
+/gate/application/setTotalNumberOfPrimaries 1000
+/gate/application/start

@@ -34,5 +34,5 @@
 
 /gate/output/allowNoOutput
 
-/gate/application/setTotalNumberOfPrimaries 10
+/gate/application/setTotalNumberOfPrimaries 1000
 /gate/application/start
