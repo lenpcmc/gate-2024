@@ -9,8 +9,9 @@
 
 #Scintillator
 /gate/world/daughters/name scin
+/gate/world/daughters/systemType OpticalSystem
 /gate/world/daughters/insert cylinder
-/gate/scin/geometry/setRmin 0 m
+/gate/scin/geometry/setRmin 0 cm
 /gate/scin/geometry/setRmax 3.175 cm
 /gate/scin/geometry/setHeight .635 cm
 /gate/scin/geometry/setPhiStart 0 rad
@@ -18,8 +19,31 @@
 /gate/scin/placement/setTranslation 15. 0. 0. cm
 /gate/scin/placement/setRotationAngle 90 deg
 /gate/scin/placement/setRotationAxis 0 1 0
-
 /gate/scin/setMaterial LYSO
+
+/gate/scin/daughters/name crystal
+/gate/scin/daughters/insert cylinder
+/gate/crystal/geometry/setRmin 0 cm
+/gate/crystal/geometry/setRmax 3.175 cm
+/gate/crystal/geometry/setHeight .635 cm
+/gate/crystal/setMaterial LYSO
+/gate/systems/scin/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert cylinder
+/gate/pixel/geometry/setRmin 0 cm
+/gate/pixel/geometry/setRmax 3.175 cm
+/gate/pixel/geometry/setHeight .0635 cm
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 10
+/gate/pixel/linear/setRepeatVector 0. 0. .0635 cm
+/gate/pixel/setMaterial LYSO
+/gate/pixel/attachCrystalSD
+/gate/systems/scin/pixel/attach pixel
+
+/gate/output/root/enable
+/gate/output/root/setFileName fakestrROOT
+/gate/output/root/setRootHitFlag 1
 
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
@@ -42,12 +66,12 @@
 /gate/source/addSource stream
 /gate/source/stream/gps/particle e-
 /gate/source/stream/gps/energytype Mono
-/gate/source/stream/gps/monoenergy 2.2 MeV
+/gate/source/stream/gps/monoenergy 22 MeV
 /gate/source/stream/gps/direction 1 0 0
 
 /gate/output/allowNoOutput
 
-#/control/execute visu.mac
+/control/execute visu.mac
 
-/gate/application/setTotalNumberOfPrimaries 200000000
+/gate/application/setTotalNumberOfPrimaries 100
 /gate/application/start
