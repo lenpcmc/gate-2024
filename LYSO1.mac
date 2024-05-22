@@ -36,7 +36,7 @@
 /gate/source/addSource stream
 /gate/source/stream/gps/particle proton
 /gate/source/stream/gps/energytype Mono
-/gate/source/stream/gps/monoenergy 100 MeV
+/gate/source/stream/gps/monoenergy 10000 MeV
 /gate/source/stream/gps/direction 1 0 0
 
 /control/execute visu.mac
