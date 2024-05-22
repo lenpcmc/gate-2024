@@ -19,14 +19,14 @@
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
 
 #eDep
-/gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save LYSO1out-idk.txt
-/gate/actor/edepReadout/stepHitType random
-/gate/actor/edepReadout/attachTo scintil
-/gate/actor/edepReadout/setSize 200 200 200 mm
-/gate/actor/edepReadout/setResolution 200 1 1
-/gate/actor/edepReadout/enableDose false
-/gate/actor/edepReadout/enableEdep true
+#/gate/actor/addActor DoseActor edepReadout
+#/gate/actor/edepReadout/save LYSO1out-idk.txt
+#/gate/actor/edepReadout/stepHitType random
+#/gate/actor/edepReadout/attachTo scintil
+#/gate/actor/edepReadout/setSize 200 200 200 mm
+#/gate/actor/edepReadout/setResolution 200 1 1
+#/gate/actor/edepReadout/enableDose false
+#/gate/actor/edepReadout/enableEdep true
 
 #Initialization
 /gate/geometry/rebuild
@@ -36,7 +36,7 @@
 /gate/source/addSource stream
 /gate/source/stream/gps/particle proton
 /gate/source/stream/gps/energytype Mono
-/gate/source/stream/gps/monoenergy 10000 MeV
+/gate/source/stream/gps/monoenergy 1000 MeV
 /gate/source/stream/gps/direction 1 0 0
 
 /control/execute visu.mac
