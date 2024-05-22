@@ -22,7 +22,7 @@
 # Create Scintillating Slab
 /gate/world/daughters/name scintillator
 /gate/world/daughters/insert cylinder
-/gate/scintillator/setMaterial ScintY #Scintillating material
+/gate/scintillator/setMaterial LYSO #Scintillating material
 /gate/scintillator/geometry/setRmin 0 mm
 /gate/scintillator/geometry/setRmax 20 mm # Measure this every time please!
 /gate/scintillator/geometry/setHeight 4 mm # Measure this every time please!
