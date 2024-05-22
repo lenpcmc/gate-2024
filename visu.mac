@@ -1,5 +1,5 @@
 
-/vis/open OGLI
+/vis/open OGLIQt
 /vis/drawVolume
 /vis/viewer/flush
 #/tracking/storeTrajectory             1
