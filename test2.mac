@@ -1,0 +1,38 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength 2 m
+/gate/world/geometry/setYLength 1 m
+/gate/world/geometry/setZLength 1 m
+/gate/world/setMaterial Vacuum
+
+/gate/world/daughters/name thing
+/gate/world/daughters/insert box
+/gate/thing/geometry/setXLength 0.5 m 
+/gate/thing/geometry/setYLength 0.5 m 
+/gate/thing/geometry/setZLength 1 m 
+/gate/thing/placement/setTranslation 50. 0. 0. cm
+/gate/thing/setMaterial Aluminium
+
+
+#Physics
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Actors
+/gate/source/addSource shots
+/gate/source/shots/gps/particle e-
+/gate/source/shots/gps/energytype Mono
+/gate/source/shots/gps/monoenergy 10 MeV
+/gate/source/shots/gps/direction 1 0 0
+
+/control/execute visu.mac
+
+/gate/output/allowNoOutput
+
+/gate/application/setTotalNumberOfPrimaries 10
+/gate/application/start

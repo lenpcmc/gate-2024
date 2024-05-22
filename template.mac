@@ -1,0 +1,28 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength  m
+/gate/world/geometry/setYLength  m
+/gate/world/geometry/setZLength  m
+/gate/world/setMaterial 
+
+/gate/world/daughters/name 
+/gate/world/daughters/insert 
+/gate//geometry/setXLength  m 
+/gate//geometry/setYLength  m 
+/gate//geometry/setZLength  m 
+
+#Physics
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Actors
+
+/control/execute visu.mac
+
+/gate/application/setTotalNumberOfPrimaries 1000
+/gate/application/start

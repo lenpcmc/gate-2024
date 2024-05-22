@@ -1,6 +1,6 @@
 #Headers
 
-/control/execute verbose.mac
+#/control/execute verbose.mac
 
 #Geometries
 /gate/geometry/setMaterialDatabase GateMaterials.db 
@@ -60,6 +60,8 @@
 /gate/source/positronPalace/gps/maxphi 0. deg
 
 /gate/source/positronPalace/attachTo gantry1
+
+/control/execute visu.mac
 
 /gate/application/setTotalNumberOfPrimaries 1000
 /gate/application/start
