@@ -40,7 +40,11 @@
 /gate/radioactiveSource/geometry/setDeltaPhi 360 deg
 /gate/radioactiveSource/vis/setColor green
 /gate/radioactiveSource/placement/setTranslation 0 0 4 cm
-/gate/radioactiveSource/setRepeaters/insert linear
+/gate/radioactiveSource/repeaters/insert linear
+/gate/radioactiveSource/linear/setRepeatNumber 4
+/gate/radioactiveSource/linear/setRepeatVector 0. 0. 1. mm
+/gate/radioactiveSource/linear/autoCenter true
+
 ###############
 # Information #
 #             #
