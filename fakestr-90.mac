@@ -49,5 +49,5 @@
 
 /control/execute visu.mac
 
-/gate/application/setTotalNumberOfPrimaries 2000000
+/gate/application/setTotalNumberOfPrimaries 200000000
 /gate/application/start
