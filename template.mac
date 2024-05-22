@@ -15,6 +15,50 @@
 /gate//placement/setTranslation 0. 0. 0. cm
 /gate//setMaterial 
 
+#OpticalSystem (detector)
+# World
+# Define the world dimensions
+/gate/world/geometry/setXLength       100. cm
+/gate/world/geometry/setYLength       100. cm
+/gate/world/geometry/setZLength       100. cm
+/gate/world/setMaterial               Air
+
+# Create the Optical Imaging system, which will yield
+# a binary output of the projection data
+/gate/world/daughters/name                      OpticalSystem
+/gate/world/daughters/insert                    box
+
+# Define the dimensions, position and material
+/gate/OpticalSystem/geometry/setXLength  cm
+/gate/OpticalSystem/geometry/setYLength  cm
+/gate/OpticalSystem/geometry/setZLength  cm
+/gate/OpticalSystem/placement/setTranslation    cm
+/gate/OpticalSystem/setMaterial 
+
+# Define pixelated detector:
+/gate/OpticalSystem/daughters/name              crystal
+/gate/OpticalSystem/daughters/insert            
+/gate/crystal/geometry/setXLength  cm
+/gate/crystal/geometry/setYLength  cm
+/gate/crystal/geometry/setZLength  cm
+/gate/crystal/placement/setTranslation    cm
+/gate/crystal/setMaterial 
+/gate/systems/OpticalSystem/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert 
+/gate/pixel/geometry/setXLength  cm
+/gate/pixel/geometry/setYLength  cm
+/gate/pixel/geometry/setZLength  cm
+/gate/pixel/setMaterial Air
+/gate/pixel/placement/setTranslation    cm
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 
+/gate/pixel/linear/setRepeatVector    cm
+/gate/pixel/attachCrystalSD
+/gate/systems/OpticalSystem/pixel/attach pixel
+
+
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
 
