@@ -41,7 +41,7 @@
 /gate/radioactiveSource/geometry/setDeltaPhi 360 deg
 /gate/radioactiveSource/vis/setColor green
 /gate/radioactiveSource/placement/setTranslation 0 0 4 cm
-
+/gate/radioactiveSource/setRepeaters/insert linear
 ###############
 # Information #
 #             #
@@ -82,7 +82,12 @@
 /gate/source/radSource/gps/minphi 90. deg
 /gate/source/radSource/gps/maxphi 90. deg
 /gate/source/radSource/gps/direction  0 0 -1
+
 /gate/source/radSource/attachTo radioactiveSource
+/gate/source/radSource/gps/shape Cylinder
+/gate/source/radSource/gps/radius 10 mm
+/gate/source/radSource/gps/halfz 10 mm
+
 
 /gate/application/setTotalNumberOfPrimaries 500
 /gate/application/start #Start er up!
