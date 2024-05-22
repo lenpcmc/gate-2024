@@ -20,7 +20,7 @@
 
 #eDep
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save LYSO1out-idk.txt
+/gate/actor/edepReadout/save LYSO1out-{energy}.txt
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo scintil
 /gate/actor/edepReadout/setSize 200 200 200 mm
