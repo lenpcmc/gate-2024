@@ -15,7 +15,7 @@
 /gate/scin/geometry/setHeight .635 cm
 /gate/scin/geometry/setPhiStart 0 rad
 /gate/scin/geometry/setDeltaPhi 6.28 rad
-/gate/scin/placement/setTranslation 5. 0. 0. cm
+/gate/scin/placement/setTranslation 15. 0. 0. cm
 /gate/scin/placement/setRotationAngle 90 deg
 /gate/scin/placement/setRotationAxis 0 1 0
 
@@ -26,7 +26,7 @@
 
 #eDep
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save fake_stron-90.txt
+/gate/actor/edepReadout/save fakestron-90.txt
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo scin
 /gate/actor/edepReadout/setSize 200 200 200 cm
