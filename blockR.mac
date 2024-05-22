@@ -1,6 +1,5 @@
 #Headers
 
-/control/execute visu.mac
 /control/execute verbose.mac
 
 #Geometries
@@ -16,7 +15,7 @@
 /gate/favoriteDaughter/geometry/setYLength 0.5 m 
 /gate/favoriteDaughter/geometry/setZLength 1 m 
 
-/gate/favoriteDaughter/vis/forceSolid
+#/gate/favoriteDaughter/vis/forceSolid
 /gate/favoriteDaughter/vis/setColor blue
 
 
@@ -46,12 +45,14 @@
 #/gate/geometry/rebuild
 /gate/run/initialize
 
+/control/execute visu.mac
 
 #Actors
 /gate/source/addSource positronPalace gps
 /gate/source/positronPalace/gps/particle e-
 /gate/source/positronPalace/gps/energytype Mono
-/gate/source/positronPalace/gps/monoenergy 511. keV
+#/gate/source/positronPalace/gps/energytype Sr90
+#/gate/source/positronPalace/gps/monoenergy 511. keV
 /gate/source/positronPalace/gps/angtype iso
 /gate/source/positronPalace/gps/mintheta 90. deg
 /gate/source/positronPalace/gps/maxtheta 90. deg
