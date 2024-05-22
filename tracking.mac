@@ -1,0 +1,3 @@
+/run/verbose      1
+/event/verbose    1
+/tracking/verbose 1
