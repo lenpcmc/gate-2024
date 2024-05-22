@@ -45,7 +45,7 @@ source /export/home/uakgun/environments/Gate-v9.1/env-setup.sh
 
 for i in {10..100..10}
 do
-	#Gate -a [energy,$i] LYSO1.mac
+	#Gate -a [energy,$i] slabR.mac
 done
 
 
