@@ -12,6 +12,8 @@
 /gate//geometry/setXLength  m 
 /gate//geometry/setYLength  m 
 /gate//geometry/setZLength  m 
+/gate//placement/setTranslation 0. 0. 0. cm
+/gate//setMaterial 
 
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
@@ -21,6 +23,11 @@
 /gate/run/initialize
 
 #Actors
+/gate/source/addSource 
+/gate/source//gps/particle 
+/gate/source//gps/energytype Mono
+/gate/source//gps/monoenergy  MeV
+/gate/source//gps/direction 0 0 0
 
 /control/execute visu.mac
 
