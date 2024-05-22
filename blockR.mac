@@ -12,18 +12,34 @@
 /gate/world/setMaterial Air
 
 /gate/world/daughters/name favoriteDaughter
+/gate/world/daughters/systemType OpticalSystem
 /gate/world/daughters/insert box
 /gate/favoriteDaughter/geometry/setXLength 0.5 m 
 /gate/favoriteDaughter/geometry/setYLength 0.5 m 
 /gate/favoriteDaughter/geometry/setZLength 1 m 
-
 /gate/favoriteDaughter/vis/forceSolid
 /gate/favoriteDaughter/vis/setColor blue
-
-
 #/gate/favoriteDaughter/placement/setTranslation .01 .01 .01 m #This would in theory change the place of origin for favoriteDaughter
-
 /gate/favoriteDaughter/setMaterial Brain
+
+/gate/favoriteDaughter/daughters/name crystal
+/gate/favoriteDaughter/daughters/insert box
+/gate/crystal/geometry/setXLength 0.5 m
+/gate/crystal/geometry/setYLength 0.5 m
+/gate/crystal/geometry/setZLength 1 m
+/gate/systems/favoriteDaughter/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert box
+/gate/pixel/geometry/setXLength 0.5 m
+/gate/pixel/geometry/setYLength 0.5 m
+/gate/pixel/geometry/setZLength 0.1 m
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 10
+/gate/pixel/linear/setRepeatVector 0. 0. 0.1 m
+
+/gate/pixel/attachCrystalSD
+/gate/systems/favoriteDaughter/pixel/attach pixel
 
 /gate/world/daughters/name gantry1
 /gate/world/daughters/insert cylinder
@@ -37,6 +53,7 @@
 /gate/gantry1/vis/setColor green
 /gate/gantry1/setMaterial Air
 
+
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
 
@@ -48,11 +65,16 @@
 /gate/run/initialize
 
 
+#output
+/gate/output/root/enable 
+/gate/output/root/setFileName brainOutput
+/gate/output/root/setRootHitFlag 1
+
 #Actors
 /gate/source/addSource positronPalace gps
 /gate/source/positronPalace/gps/particle e-
 /gate/source/positronPalace/gps/energytype Mono
-/gate/source/positronPalace/gps/monoenergy 511. keV
+/gate/source/positronPalace/gps/monoenergy 9. MeV
 /gate/source/positronPalace/gps/angtype iso
 /gate/source/positronPalace/gps/mintheta 90. deg
 /gate/source/positronPalace/gps/maxtheta 90. deg

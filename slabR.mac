@@ -5,6 +5,7 @@
 #                #
 ##################
 /control/execute verbose.mac
+/control/execute visu.mac
 
 ###################
 #   Configuring   #
@@ -20,14 +21,40 @@
 
 # Create Scintillating Slab
 /gate/world/daughters/name scintillator
+/gate/world/daughters/systemType OpticalSystem
 /gate/world/daughters/insert cylinder
-/gate/scintillator/setMaterial LYSO #Scintillating material
+/gate/scintillator/setMaterial ptpppo #Scintillating material
 /gate/scintillator/geometry/setRmin 0 mm
 /gate/scintillator/geometry/setRmax 20 mm # Measure this every time please!
 /gate/scintillator/geometry/setHeight 4 mm # Measure this every time please!
 /gate/scintillator/geometry/setPhiStart 0 deg
 /gate/scintillator/geometry/setDeltaPhi 360 deg
 /gate/scintillator/vis/setColor yellow
+
+/gate/scintillator/daughters/name crystal
+/gate/scintillator/daughters/insert cylinder
+/gate/crystal/setMaterial ptpppo
+/gate/crystal/geometry/setRmin 0 mm
+/gate/crystal/geometry/setRmax 20 mm
+/gate/crystal/geometry/setHeight 4 mm
+/gate/crystal/geometry/setPhiStart 0 deg
+/gate/crystal/geometry/setDeltaPhi 360 deg
+/gate/systems/scintillator/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert cylinder
+/gate/pixel/setMaterial ptpppo
+/gate/pixel/geometry/setRmin 0 mm
+/gate/pixel/geometry/setRmax 20 mm
+/gate/pixel/geometry/setHeight 0.4 mm
+/gate/pixel/geometry/setPhiStart 0 deg
+/gate/pixel/geometry/setDeltaPhi 360 deg
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 10
+/gate/pixel/linear/setRepeatVector 0. 0. 0.4 mm
+
+/gate/pixel/attachCrystalSD
+/gate/systems/scintillator/pixel/attach pixel
 
 # Create strontium (or other) source
 /gate/world/daughters/name radioactiveSource
@@ -41,7 +68,7 @@
 /gate/radioactiveSource/vis/setColor green
 /gate/radioactiveSource/placement/setTranslation 0 0 4 cm
 /gate/radioactiveSource/repeaters/insert linear
-/gate/radioactiveSource/linear/setRepeatNumber 4
+/gate/radioactiveSource/linear/setRepeatNumber 10
 /gate/radioactiveSource/linear/setRepeatVector 0. 0. 1. mm
 /gate/radioactiveSource/linear/autoCenter true
 
@@ -51,6 +78,9 @@
 ###############
 
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+/gate/physics/Electron/SetCutInRegion scintillator  0.04 mm
+/gate/physics/Gamma/SetCutInRegion scintillator 0.04 mm
+/gate/physics/SetMaxStepSizeInRegion scintillator 0.04 mm
 
 ##################
 #  Moving Parts  #
@@ -62,6 +92,11 @@
 # Save File #
 #           #
 #############
+
+#Root output
+/gate/output/root/enable
+/gate/output/root/setFileName scintillatorOutput
+/gate/output/root/setRootHitFlag 1
 
 # Energy Deposition readout
 /gate/actor/addActor DoseActor edepReadout
@@ -75,30 +110,31 @@
 
 /gate/run/initialize
 
-/control/execute visu.mac
 
 
 #Radiation source
+
 /gate/source/addSource radSource gps
+
+/gate/source/radSource/gps/pos/type Volume
+/gate/source/radSource/gps/pos/shape Cylinder
+/gate/source/radSource/gps/pos/radius 10 mm
+/gate/source/radSource/gps/pos/halfz 100 mm
+/gate/source/radSource/gps/pos/centre 0. 0. 0. m
+# /gate/source/radSource/attachTo radioactiveSource
+
 /gate/source/radSource/gps/particle e- # Measure
 /gate/source/radSource/gps/energytype UserSpectrum # Spectrum file taken from a paper for strontium 90
 /gate/source/radSource/gps/setSpectrumFile ../data/strontiumSpectrum.txt
-/gate/source/radSource/gps/angtype iso
-/gate/source/radSource/gps/mintheta 90. deg
-/gate/source/radSource/gps/maxtheta 90. deg
-/gate/source/radSource/gps/minphi 90. deg
-/gate/source/radSource/gps/maxphi 90. deg
-/gate/source/radSource/gps/direction  0 1 0
-
-/gate/source/radSource/gps/type Volume
-/gate/source/radSource/gps/shape Cylinder
-/gate/source/radSource/gps/radius 10 mm
-/gate/source/radSource/gps/halfz 100 mm
-# /gate/source/radSource/attachTo radioactiveSource
-#/gate/source/radSource/gps/confine radSource_phys
-/gate/source/radSource/gps/centre 0. 0. 0.2 m
+/gate/source/radSource/gps/ang/type iso
+/gate/source/radSource/gps/ang/mintheta 90. deg
+/gate/source/radSource/gps/ang/maxtheta 90. deg
+/gate/source/radSource/gps/ang/minphi 90. deg
+/gate/source/radSource/gps/ang/maxphi 90. deg
+/gate/source/radSource/gps/direction  0 0 -1
+/gate/source/radSource/gps/pos/confine radioactiveSource_phys
 
 /gate/source/radSource/visualize 3000 green 5
 
-/gate/application/setTotalNumberOfPrimaries 1
+/gate/application/setTotalNumberOfPrimaries 1000
 /gate/application/start #Start er up!
