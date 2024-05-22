@@ -41,6 +41,10 @@
 /gate/radioactiveSource/geometry/setDeltaPhi 360 deg
 /gate/radioactiveSource/vis/setColor green
 /gate/radioactiveSource/placement/setTranslation 0 0 4 cm
+/gate/radioactiveSource/repeaters/insert linear
+/gate/radioactiveSource/linear/setRepeatNumber {numberofsources}
+/gate/radioactiveSource/linear/setRepeatVector 0. 0. 2. mm
+/gate/radioactiveSource/linear/autoCenter true
 
 ###############
 # Information #
@@ -55,11 +59,14 @@
 ##################
 
 
-# Actors
+#############
+# Save File #
+#           #
+#############
 
 # Energy Deposition readout
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save slabROut.txt #Comment this one out if you don't want to record
+/gate/actor/edepReadout/save slabROut{numberofsources}.txt #Comment this one out if you don't want to record
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo scintillator
 /gate/actor/edepReadout/setSize 1000 1000 4 mm
