@@ -1,0 +1,15 @@
+
+# halflife=28.8 years
+# Age = 11.6 years
+# Initial radioactivity = 0.1 microcuries 
+# radioactivity remaining = 0.1*0.5^(11.67/28.8) microcuries = 0.0755 microcuries
+# 1 Ci is equal to 37 billion (3.7 x 1010) disintegrations per second
+# Each source emits 37.*10^9*0.0755*10^-6=2.7935*10^3 disintegrations per second
+
+# Simulated integrated edep for known source = I (integrated energy)
+# Experimental photon counting for known source = G (gamma)
+# Our photons per MeV will be X=G/I
+# Manufacturer provided phontons per MeV will be M
+# conversion factor will be A=X/M 
+# Count photons for desired material 
+#Actual energy deposition = time * D * 
