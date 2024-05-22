@@ -1,0 +1,61 @@
+#!/bin/bash
+##############################################################
+# HARD-CODED
+# Inspect carefully before reuse
+##############################################################
+#
+###                             Queue to submit to  <<<<<<<<<< queue and host name must be adapted to your system
+#PBS -q workq@glass
+###                             Resource requirements
+#PBS -l nodes=1:ppn=1
+#PBS -l mem=4gb
+#PBS -l walltime=4:00:00
+###                             batch job stderr and stdout
+#PBS -o ./pbs
+#PBS -e ./pbs
+###                             Job name
+#PBS -N my_name
+###                             Define environment
+#PBS -V
+###                             Declare job non-rerunable
+#PBS -r n
+
+### FYI ###
+echo
+echo ---------------------- Job Info ------------------------------
+echo
+echo -e "Name of the working queue \t"     $PBS_QUEUE
+echo -e "Job name                  \t"    $PBS_JOBNAME
+echo -e "Job identifier            \t"    $PBS_JOBID
+echo -e "Working directory is      \t"    $PBS_O_WORKDIR
+echo -e "Running on host           \t"    $(hostname)
+echo -e "Start time                \t"    $(date)
+echo
+cd $(pwd)
+echo $(pwd)
+
+echo
+echo ---------------------- Job Output ----------------------------
+echo
+
+
+### Define Job Here ###
+
+# Environment
+source /export/home/uakgun/environments/Gate-v9.1/env-setup.sh
+
+# Executable 
+for i in {10..100..10}
+do
+        echo $(pwd)
+        Gate -a [energy,$i] LYSO1.mac
+done
+
+
+### FYI ###
+echo
+echo ----------------------- DONE ---------------------------------
+echo
+echo -e "Time after job execution \t"     `date`
+
+exit 0
