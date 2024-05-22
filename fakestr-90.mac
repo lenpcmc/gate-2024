@@ -47,7 +47,7 @@
 
 /gate/output/allowNoOutput
 
-/control/execute visu.mac
+#/control/execute visu.mac
 
 /gate/application/setTotalNumberOfPrimaries 2000000
 /gate/application/start
