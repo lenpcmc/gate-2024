@@ -19,14 +19,14 @@
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
 
 #eDep
-#/gate/actor/addActor DoseActor edepReadout
-#/gate/actor/edepReadout/save LYSO1out-idk.txt
-#/gate/actor/edepReadout/stepHitType random
-#/gate/actor/edepReadout/attachTo scintil
-#/gate/actor/edepReadout/setSize 200 200 200 mm
-#/gate/actor/edepReadout/setResolution 200 1 1
-#/gate/actor/edepReadout/enableDose false
-#/gate/actor/edepReadout/enableEdep true
+/gate/actor/addActor DoseActor edepReadout
+/gate/actor/edepReadout/save LYSO1out-idk.txt
+/gate/actor/edepReadout/stepHitType random
+/gate/actor/edepReadout/attachTo scintil
+/gate/actor/edepReadout/setSize 200 200 200 mm
+/gate/actor/edepReadout/setResolution 200 1 1
+/gate/actor/edepReadout/enableDose false
+/gate/actor/edepReadout/enableEdep true
 
 #Initialization
 /gate/geometry/rebuild

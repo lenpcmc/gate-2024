@@ -491,3 +491,7 @@ ScintY: d=1.05 g/cm3;          n=3
         +mat: name=BisMSB     ;   f= 0.000196
         +mat: name=Polystyrene;   f= 0.9802
 
+ptpppo: d=0.96 g/cm3; n=3
+        +mat: name=Polystyrene;   f= 0.9877
+        +mat: name=ptp;           f= 0.0112
+        +mat: name = ppo;         f=0.000116
