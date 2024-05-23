@@ -1,0 +1,113 @@
+
+/control/execute verbose.mac
+/control/execute visu.mac
+
+
+###########
+#  World  #
+###########
+/gate/geometry/setMaterialDatabase GateMaterials.db
+
+/gate/world/geometry/setXLength 0.6 m
+/gate/world/geometry/setYLength 0.6 m
+/gate/world/geometry/setZLength 0.6 m
+/gate/world/setMaterial Air
+
+/gate/world/daughters/name detector
+/gate/world/daughters/systemType OpticalSystem
+/gate/world/daughters/insert cylinder
+/gate/detector/setMaterial NaI
+/gate/detector/geometry/setRmin 0.29 m
+/gate/detector/geometry/setRmax .3 m
+/gate/detector/geometry/setHeight 5 cm
+/gate/detector/geometry/setPhiStart 0 deg
+/gate/detector/geometry/setDeltaPhi 360 deg
+/gate/detector/vis/setColor cyan
+
+/gate/detector/daughters/name crystal
+/gate/detector/daughters/insert cylinder
+/gate/crystal/setMaterial NaI
+/gate/crystal/geometry/setRmin 0.29 m
+/gate/crystal/geometry/setRmax 0.3 m
+/gate/crystal/geometry/setHeight 5 cm
+/gate/crystal/geometry/setPhiStart 0 deg
+/gate/crystal/geometry/setDeltaPhi 360 deg
+/gate/systems/detector/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert cylinder
+/gate/pixel/setMaterial NaI
+/gate/pixel/geometry/setRmin 0.29 m
+/gate/pixel/geometry/setRmax 0.3 m
+/gate/pixel/geometry/setHeight 5 cm
+/gate/pixel/geometry/setPhiStart 0 deg
+/gate/pixel/geometry/setDeltaPhi 30 deg
+/gate/pixel/repeaters/insert ring
+/gate/pixel/ring/setRepeatNumber 12
+/gate/pixel/ring/setPoint1 0 0 0 mm
+/gate/pixel/ring/setPoint1 0 0 1 mm
+/gate/pixel/attachCrystalSD
+/gate/systems/detector/pixel/attach pixel
+
+
+/gate/world/daughters/name foil
+/gate/world/daughters/insert box
+/gate/foil/setMaterial Gold
+/gate/foil/geometry/setXLength 0.6 m
+/gate/foil/geometry/setYLength 0.1 mm #Width of foil
+/gate/foil/geometry/setZLength 5 cm
+/gate/foil/vis/setColor yellow
+
+/gate/world/daughters/name beam
+/gate/world/daughters/insert cylinder
+/gate/beam/setMaterial Air
+/gate/beam/geometry/setRmin 0 mm
+/gate/beam/geometry/setRmax 1 cm
+/gate/beam/geometry/setHeight 2 cm
+/gate/beam/placement/setRotationAxis 1 0 0
+/gate/beam/placement/setRotationAngle 90 deg
+/gate/beam/placement/setTranslation 0 10 0 cm
+/gate/beam/vis/setColor green
+
+###############
+# Information #
+#             #
+###############
+
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+###########
+# Outputs #
+###########
+
+#/gate/output/allowNoOutput
+
+/gate/run/initialize
+
+/gate/output/root/enable 
+/gate/output/root/setFileName GoldFoilData
+/gate/output/root/setRootHitFlag 1
+
+# Dramatis Personae
+/gate/source/addSource alphaPs gps
+/gate/source/alphaPs/gps/particle alpha
+/gate/source/alphaPs/gps/energytype Mono
+/gate/source/alphaPs/gps/monoenergy 50 MeV # Vary this
+/gate/source/alphaPs/gps/ang/type iso
+/gate/source/alphaPs/gps/ang/mintheta 0. deg
+/gate/source/alphaPs/gps/ang/maxtheta 360. deg
+/gate/source/alphaPs/gps/ang/minphi 90. deg
+/gate/source/alphaPs/gps/ang/maxphi 90. deg
+/gate/source/alphaPs/gps/direction  0 0 1
+/gate/source/alphaPs/attachTo beam
+
+
+#########
+# Start #
+#########
+
+/gate/application/setTotalNumberOfPrimaries 100000
+/gate/application/start #Start er up!
+
+# {energy} should go [energy,0.1] iterated by 0.1
+# {width} should be iterated separately
