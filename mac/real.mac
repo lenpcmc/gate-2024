@@ -85,7 +85,7 @@
 
 #eDep
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save realoutput.txt
+/gate/actor/edepReadout/save output/realoutput.txt
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo OpticalSystem1
 /gate/actor/edepReadout/setSize 200 200 200 m
@@ -113,7 +113,5 @@
 
 /control/execute visu.mac
 
-/gate/output/allowNoOutput
-
-/gate/application/setTotalNumberOfPrimaries 4000
+/gate/application/setTotalNumberOfPrimaries 40
 /gate/application/start
