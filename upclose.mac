@@ -24,7 +24,7 @@
 /gate/OpticalSystem1/geometry/setHeight .635 cm
 /gate/OpticalSystem1/geometry/setPhiStart 0 rad
 /gate/OpticalSystem1/geometry/setDeltaPhi 6.28 rad
-/gate/OpticalSystem1/placement/setTranslation 15. 0. 0. cm
+/gate/OpticalSystem1/placement/setTranslation 5. 0. 0. cm
 /gate/OpticalSystem1/placement/setRotationAngle 90 deg
 /gate/OpticalSystem1/placement/setRotationAxis 0 1 0
 /gate/OpticalSystem1/setMaterial LYSO
@@ -51,44 +51,21 @@
 /gate/systems/OpticalSystem1/pixel/attach pixel
 ###########################################################################################################################################
 
-/gate/world/daughters/name brickperpz1
-/gate/world/daughters/insert box
-/gate/brickperpz1/geometry/setXLength 20 cm
-/gate/brickperpz1/geometry/setYLength 10 cm
-/gate/brickperpz1/geometry/setZLength 10 cm
-/gate/brickperpz1/placement/setTranslation 0 0 8 cm
-/gate/brickperpz1/setMaterial Lead
+/gate/world/daughters/name foil
+/gate/world/daughters/insert cylinder
+/gate/foil/geometry/setRmin 1 cm
+/gate/foil/geometry/setRmax 3.175 cm
+/gate/foil/geometry/setHeight .1 cm
+/gate/foil/placement/setTranslation 4.75 0 0 cm
+/gate/foil/placement/setRotationAngle 90 deg
+/gate/foil/placement/setRotationAxis 0 1 0
+/gate/foil/setMaterial Aluminium
 
-/gate/world/daughters/name brickperpz2
-/gate/world/daughters/insert box
-/gate/brickperpz2/geometry/setXLength 20 cm
-/gate/brickperpz2/geometry/setYLength 10 cm
-/gate/brickperpz2/geometry/setZLength 10 cm
-/gate/brickperpz2/placement/setTranslation 0 0 -8 cm
-/gate/brickperpz2/setMaterial Lead
-
-/gate/world/daughters/name brickperpx1
-/gate/world/daughters/insert box
-/gate/brickperpx1/geometry/setXLength 2 cm
-/gate/brickperpx1/geometry/setYLength 10 cm
-/gate/brickperpx1/geometry/setZLength 6 cm
-/gate/brickperpx1/placement/setTranslation 11 0 4 cm
-/gate/brickperpx1/setMaterial Aluminium
-
-/gate/world/daughters/name brickperpx2
-/gate/world/daughters/insert box
-/gate/brickperpx2/geometry/setXLength 2 cm
-/gate/brickperpx2/geometry/setYLength 10 cm
-/gate/brickperpx2/geometry/setZLength 6 cm
-/gate/brickperpx2/placement/setTranslation 11 0 -4 cm
-/gate/brickperpx2/setMaterial Aluminium
-
-#eDep
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save realoutput.txt
+/gate/actor/edepReadout/save upcloseoutput.txt
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo OpticalSystem1
-/gate/actor/edepReadout/setSize 200 200 200 m
+/gate/actor/edepReadout/setSize 200 200 200 mm
 /gate/actor/edepReadout/setResolution 1 1 1
 /gate/actor/edepReadout/enableDose false
 /gate/actor/edepReadout/enableEdep true
@@ -113,7 +90,9 @@
 
 /control/execute visu.mac
 
-/gate/output/allowNoOutput
+/gate/output/root/enable
+/gate/output/root/setFileName upcloseROOT
+/gate/output/root/setRootHitFlag 1
 
-/gate/application/setTotalNumberOfPrimaries 4000
+/gate/application/setTotalNumberOfPrimaries 100
 /gate/application/start
