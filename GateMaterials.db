@@ -512,3 +512,6 @@ ETape:  d=1.1 g/cm3; n=3
         +el: name=Carbon;         n=2
         +el: name=Hydrogen;        n=3
         +el: name=Chlorine;        n=1
+
+Graphite: d=2.26 g/cm3; n=1
+        +el: name=Carbon;       n=1

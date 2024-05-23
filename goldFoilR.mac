@@ -1,6 +1,5 @@
 
 /control/execute verbose.mac
-/control/execute visu.mac
 
 
 ###########
@@ -8,16 +7,16 @@
 ###########
 /gate/geometry/setMaterialDatabase GateMaterials.db
 
-/gate/world/geometry/setXLength 0.6 m
-/gate/world/geometry/setYLength 0.6 m
-/gate/world/geometry/setZLength 0.6 m
+/gate/world/geometry/setXLength 0.7 m
+/gate/world/geometry/setYLength 0.7 m
+/gate/world/geometry/setZLength 0.7 m
 /gate/world/setMaterial Air
 
 /gate/world/daughters/name detector
 /gate/world/daughters/systemType OpticalSystem
 /gate/world/daughters/insert cylinder
 /gate/detector/setMaterial NaI
-/gate/detector/geometry/setRmin 0.29 m
+/gate/detector/geometry/setRmin 0.25 m
 /gate/detector/geometry/setRmax .3 m
 /gate/detector/geometry/setHeight 5 cm
 /gate/detector/geometry/setPhiStart 0 deg
@@ -27,7 +26,7 @@
 /gate/detector/daughters/name crystal
 /gate/detector/daughters/insert cylinder
 /gate/crystal/setMaterial NaI
-/gate/crystal/geometry/setRmin 0.29 m
+/gate/crystal/geometry/setRmin 0.25 m
 /gate/crystal/geometry/setRmax 0.3 m
 /gate/crystal/geometry/setHeight 5 cm
 /gate/crystal/geometry/setPhiStart 0 deg
@@ -37,7 +36,7 @@
 /gate/crystal/daughters/name pixel
 /gate/crystal/daughters/insert cylinder
 /gate/pixel/setMaterial NaI
-/gate/pixel/geometry/setRmin 0.29 m
+/gate/pixel/geometry/setRmin 0.25 m
 /gate/pixel/geometry/setRmax 0.3 m
 /gate/pixel/geometry/setHeight 5 cm
 /gate/pixel/geometry/setPhiStart 0 deg
@@ -69,13 +68,17 @@
 /gate/beam/placement/setTranslation 0 10 0 cm
 /gate/beam/vis/setColor green
 
+
+
 ###############
 # Information #
 #             #
 ###############
 
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
-
+/gate/physics/Electron/SetCutInRegion detector  0.04 mm
+/gate/physics/Gamma/SetCutInRegion detector 0.04 mm
+/gate/physics/SetMaxStepSizeInRegion detector 0.04 mm
 ###########
 # Outputs #
 ###########
@@ -84,15 +87,21 @@
 
 /gate/run/initialize
 
+/control/execute visu.mac
+
 /gate/output/root/enable 
 /gate/output/root/setFileName GoldFoilData
 /gate/output/root/setRootHitFlag 1
 
+/gate/output/ascii/enable 
+/gate/output/ascii/setFileName GoldFoilDataAscii
+/gate/output/ascii/setOutFileHitsFlag 1
+
 # Dramatis Personae
 /gate/source/addSource alphaPs gps
-/gate/source/alphaPs/gps/particle alpha
-/gate/source/alphaPs/gps/energytype Mono
-/gate/source/alphaPs/gps/monoenergy 50 MeV # Vary this
+/gate/source/alphaPs/gps/particle e-
+/gate/source/alphaPs/gps/ene/type Mono
+/gate/source/alphaPs/gps/ene/mono 5 MeV # Vary this
 /gate/source/alphaPs/gps/ang/type iso
 /gate/source/alphaPs/gps/ang/mintheta 0. deg
 /gate/source/alphaPs/gps/ang/maxtheta 360. deg
@@ -106,7 +115,7 @@
 # Start #
 #########
 
-/gate/application/setTotalNumberOfPrimaries 100000
+/gate/application/setTotalNumberOfPrimaries 1000000
 /gate/application/start #Start er up!
 
 # {energy} should go [energy,0.1] iterated by 0.1
