@@ -56,6 +56,17 @@
 /gate/pixel/attachCrystalSD
 /gate/systems/scintillator/pixel/attach pixel
 
+#Shielding tape mask
+/gate/world/daughters/name tape
+/gate/world/daughters/insert cylinder
+/gate/tape/geometry/setRmin 0 mm
+/gate/tape/geometry/setRmax 20 mm
+/gate/tape/geometry/setHeight 1 mm
+/gate/tape/geometry/setPhiStart 0 deg
+/gate/tape/geometry/setDeltaPhi 360 deg
+/gate/tape/vis/setColor gray
+/gate/tape/setMaterial ETape
+
 # Create strontium (or other) source
 /gate/world/daughters/name radioactiveSource
 /gate/world/daughters/insert cylinder
@@ -95,7 +106,7 @@
 
 #Root output
 /gate/output/root/enable
-/gate/output/root/setFileName scintillatorOutput
+#/gate/output/root/setFileName scintillatorOutput #uncomment for root file (even visual!) output
 /gate/output/root/setRootHitFlag 1
 
 # Energy Deposition readout
@@ -104,7 +115,7 @@
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo scintillator
 /gate/actor/edepReadout/setSize 1000 1000 4 mm
-/gate/actor/edepReadout/setResolution 1 1 10
+/gate/actor/edepReadout/setResolution 1 1 30
 /gate/actor/edepReadout/enableDose false
 /gate/actor/edepReadout/enableEdep true
 
@@ -127,8 +138,8 @@
 /gate/source/radSource/gps/energytype UserSpectrum # Spectrum file taken from a paper for strontium 90
 /gate/source/radSource/gps/setSpectrumFile ../data/strontiumSpectrum.txt
 /gate/source/radSource/gps/ang/type iso
-/gate/source/radSource/gps/ang/mintheta 90. deg
-/gate/source/radSource/gps/ang/maxtheta 90. deg
+/gate/source/radSource/gps/ang/mintheta 0. deg
+/gate/source/radSource/gps/ang/maxtheta 360. deg
 /gate/source/radSource/gps/ang/minphi 90. deg
 /gate/source/radSource/gps/ang/maxphi 90. deg
 /gate/source/radSource/gps/direction  0 0 -1
