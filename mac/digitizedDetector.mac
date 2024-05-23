@@ -1,0 +1,177 @@
+
+### Headers ###
+/control/execute verbose.mac
+
+
+
+### Geometry ###
+
+# World
+/gate/geometry/setMaterialDatabase GateMaterials.db
+/gate/world/geometry/setXLength 0.7 m
+/gate/world/geometry/setYLength 1. m
+/gate/world/geometry/setZLength 0.7 m
+/gate/world/setMaterial Air
+/gate/world/vis/setColor white
+
+# Base Scanner (type: CTscanner)
+/gate/world/daughters/name baseScanner
+/gate/world/daughters/systemType CTscanner
+/gate/world/daughters/insert box
+/gate/baseScanner/geometry/setXLength 0.5 m
+/gate/baseScanner/geometry/setYLength 0.2 m
+/gate/baseScanner/geometry/setZLength 0.5 m
+/gate/baseScanner/setMaterial Air
+/gate/baseScanner/vis/setVisible 0
+
+# Base Module (level: module)
+/gate/baseScanner/daughters/name baseModule
+/gate/baseScanner/daughters/insert box
+/gate/baseModule/geometry/setXLength 0.5 m
+/gate/baseModule/geometry/setYLength 0.2 m
+/gate/baseModule/geometry/setZLength 0.5 m
+/gate/baseModule/setMaterial Air
+/gate/baseModule/vis/setVisible 0
+
+
+# Base Cluster 0 (level: cluster)
+/gate/baseModule/daughters/name baseCluster0
+/gate/baseModule/daughters/insert box
+/gate/baseCluster0/geometry/setXLength 0.5 m
+/gate/baseCluster0/geometry/setYLength 0.1 m
+/gate/baseCluster0/geometry/setZLength 0.5 m
+/gate/baseCluster0/placement/setTranslation 0. 0.05 0. m
+/gate/baseCluster0/setMaterial Air
+/gate/baseCluster0/vis/setColor blue
+
+# Base Cluster 1 (level: cluster)
+/gate/baseModule/daughters/name baseCluster1
+/gate/baseModule/daughters/insert box
+/gate/baseCluster1/geometry/setXLength 0.5 m
+/gate/baseCluster1/geometry/setYLength 0.1 m
+/gate/baseCluster1/geometry/setZLength 0.5 m
+/gate/baseCluster1/placement/setTranslation 0. -0.05 0. m
+/gate/baseCluster1/setMaterial Air
+/gate/baseCluster1/vis/setColor blue
+
+
+# Fibers Repeated over X (level: pixel)
+/gate/baseCluster0/daughters/name xFibers
+/gate/baseCluster0/daughters/insert box
+/gate/xFibers/geometry/setXLength 1. mm
+/gate/xFibers/geometry/setYLength 1. mm
+/gate/xFibers/geometry/setZLength 450. mm
+/gate/xFibers/setMaterial LYSO
+/gate/xFibers/vis/setColor yellow
+
+/gate/xFibers/placement/setRotationAxis 0 0 1
+/gate/xFibers/placement/setRotationAngle 90. deg
+/gate/xFibers/repeaters/insert linear
+/gate/xFibers/linear/setRepeatNumber 10
+/gate/xFibers/linear/setRepeatVector 45. 0. 0. mm
+
+# Fibers Repeated over Z (level: pixel)
+/gate/baseCluster1/daughters/name zFibers
+/gate/baseCluster1/daughters/insert box
+/gate/zFibers/geometry/setXLength 1. mm
+/gate/zFibers/geometry/setYLength 1. mm
+/gate/zFibers/geometry/setZLength 450. mm
+/gate/zFibers/setMaterial LYSO
+/gate/zFibers/vis/setColor yellow
+
+/gate/zFibers/placement/setRotationAxis 0 1 0
+/gate/zFibers/placement/setRotationAngle 90. deg
+/gate/zFibers/repeaters/insert linear
+/gate/zFibers/linear/setRepeatNumber 10
+/gate/zFibers/linear/setRepeatVector 0. 0. 45. mm
+
+
+# Gantry
+/gate/world/daughters/name gantry
+/gate/world/daughters/insert box
+/gate/gantry/geometry/setXLength 1. mm
+/gate/gantry/geometry/setYLength 1. mm
+/gate/gantry/geometry/setZLength 1. mm
+/gate/gantry/placement/setTranslation 0. 0.45 0. m
+/gate/gantry/setMaterial Air
+/gate/gantry/vis/setColor cyan
+
+
+
+### Physics ###
+
+# Lists
+/gate/physics/addPhysicsList emstandard
+
+# Cuts
+/gate/physics/Gamma/SetCutInRegion xFibers 0.05 mm
+/gate/physics/Electron/SetCutInRegion xFibers 0.05 mm
+/gate/physics/Positron/SetCutInRegion xFibers 0.05 mm
+/gate/physics/Proton/SetCutInRegion xFibers 0.05 mm
+
+/gate/physics/Gamma/SetCutInRegion zFibers 0.05 mm
+/gate/physics/Electron/SetCutInRegion zFibers 0.05 mm
+/gate/physics/Positron/SetCutInRegion zFibers 0.05 mm
+/gate/physics/Proton/SetCutInRegion zFibers 0.05 mm
+
+
+
+### Output ###
+
+# Systems
+/gate/systems/baseScanner/module/attach baseModule
+/gate/systems/baseScanner/cluster_0/attach baseCluster0
+/gate/systems/baseScanner/pixel_0/attach xFibers
+/gate/systems/baseScanner/cluster_1/attach baseCluster1
+/gate/systems/baseScanner/pixel_1/attach zFibers
+
+/gate/xFibers/attachCrystalSD
+/gate/zFibers/attachCrystalSD
+
+
+# ROOT
+/gate/output/root/enable
+/gate/output/root/setFileName output/digitizedDetectorOut
+/gate/output/root/setRootHitFlag 1
+/gate/output/root/setRootSingleFlag 1
+
+
+
+### Digitizer ###
+
+# /gate/digitizer/Singles/insert adder
+
+
+
+##### INITIALIZE! #####
+/gate/run/initialize
+
+/control/execute visu.mac
+
+
+
+### Sources ###
+
+# Electron Source
+/gate/source/addSource radSrc gps
+/gate/source/radSrc/gps/particle e-
+/gate/source/radSrc/gps/ene/type Mono
+/gate/source/radSrc/gps/ene/mono 9. MeV
+/gate/source/radSrc/gps/ang/type iso
+/gate/source/radSrc/gps/ang/maxtheta 15. deg
+/gate/source/radSrc/gps/ang/maxphi 360. deg
+/gate/source/radSrc/gps/direction 0. -1. 0.
+/gate/source/radSrc/attachTo gantry
+
+
+
+### Application ###
+
+# Time
+/gate/application/setTimeSlice 1. s
+/gate/application/setTimeStart 0. s
+/gate/application/setTimeStop 0. s
+
+# Start
+/gate/application/setTotalNumberOfPrimaries 10000000
+/gate/application/start
