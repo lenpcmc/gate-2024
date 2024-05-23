@@ -4,23 +4,23 @@
 # Inspect carefully before reuse
 ##############################################################
 #
-###				Queue to submit to  <<<<<<<<<< queue and host name must be adapted to your system
+###                             Queue to submit to  <<<<<<<<<< queue and host name must be adapted to your system
 #PBS -q workq@glass
-###				Resource requirements
+###                             Resource requirements
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=4gb
 #PBS -l walltime=4:00:00
-###				batch job stderr and stdout
+###                             batch job stderr and stdout
 #PBS -o ./pbs
 #PBS -e ./pbs
-###				Job name
+###                             Job name
 #PBS -N my_name
-###				Define environment
+###                             Define environment
 #PBS -V
-###				Declare job non-rerunable
+###                             Declare job non-rerunable
 #PBS -r n
 
-# FYI
+### FYI ###
 echo
 echo ---------------------- Job Info ------------------------------
 echo
@@ -39,22 +39,23 @@ echo ---------------------- Job Output ----------------------------
 echo
 
 
-# H E R E you may set up your environment      <<<<<<<<<<  see include/my_environment.example
-source /export/home/uakgun/environments/Gate-v9.1/env-setup.sh
-# executable 
+### Define Job Here ###
 
+# Environment
+source /export/home/uakgun/environments/Gate-v9.1/env-setup.sh
+
+# Executable 
 for i in {10..100..10}
 do
-	echo $(pwd)
-	Gate -a [energy,$i] LYSO1.mac
+        echo $(pwd)
+        Gate -a [energy,$i] LYSO1.mac
 done
 
 
+### FYI ###
 echo
 echo ----------------------- DONE ---------------------------------
 echo
 echo -e "Time after job execution \t"     `date`
 
 exit 0
-
-
