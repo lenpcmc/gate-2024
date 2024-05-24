@@ -15,8 +15,8 @@
 /gate/world/daughters/name detector
 /gate/world/daughters/systemType OpticalSystem
 /gate/world/daughters/insert cylinder
-/gate/detector/setMaterial NaI
-/gate/detector/geometry/setRmin 0.25 m
+/gate/detector/setMaterial ptpppo
+/gate/detector/geometry/setRmin 0.28 m
 /gate/detector/geometry/setRmax .3 m
 /gate/detector/geometry/setHeight 5 cm
 /gate/detector/geometry/setPhiStart 0 deg
@@ -26,7 +26,7 @@
 /gate/detector/daughters/name crystal
 /gate/detector/daughters/insert cylinder
 /gate/crystal/setMaterial NaI
-/gate/crystal/geometry/setRmin 0.25 m
+/gate/crystal/geometry/setRmin 0.28 m
 /gate/crystal/geometry/setRmax 0.3 m
 /gate/crystal/geometry/setHeight 5 cm
 /gate/crystal/geometry/setPhiStart 0 deg
@@ -36,13 +36,13 @@
 /gate/crystal/daughters/name pixel
 /gate/crystal/daughters/insert cylinder
 /gate/pixel/setMaterial NaI
-/gate/pixel/geometry/setRmin 0.25 m
+/gate/pixel/geometry/setRmin 0.28 m
 /gate/pixel/geometry/setRmax 0.3 m
 /gate/pixel/geometry/setHeight 5 cm
 /gate/pixel/geometry/setPhiStart 0 deg
-/gate/pixel/geometry/setDeltaPhi 30 deg
+/gate/pixel/geometry/setDeltaPhi 2 deg
 /gate/pixel/repeaters/insert ring
-/gate/pixel/ring/setRepeatNumber 12
+/gate/pixel/ring/setRepeatNumber 180
 /gate/pixel/ring/setPoint1 0 0 0 mm
 /gate/pixel/ring/setPoint1 0 0 1 mm
 /gate/pixel/attachCrystalSD
@@ -115,7 +115,7 @@
 # Start #
 #########
 
-/gate/application/setTotalNumberOfPrimaries 1000000
+/gate/application/setTotalNumberOfPrimaries 100000
 /gate/application/start #Start er up!
 
 # {energy} should go [energy,0.1] iterated by 0.1
