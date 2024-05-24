@@ -139,13 +139,13 @@
 /gate/source/radSource/gps/setSpectrumFile ../data/strontiumSpectrum.txt
 /gate/source/radSource/gps/ang/type iso
 /gate/source/radSource/gps/ang/mintheta 0. deg
-/gate/source/radSource/gps/ang/maxtheta 360. deg
+/gate/source/radSource/gps/ang/maxtheta 180. deg
 /gate/source/radSource/gps/ang/minphi 0. deg
-/gate/source/radSource/gps/ang/maxphi 180. deg
-/gate/source/radSource/gps/direction  0 0 -1
+/gate/source/radSource/gps/ang/maxphi 360. deg
+#/gate/source/radSource/gps/direction  0 0 -1
 /gate/source/radSource/gps/pos/confine radioactiveSource_phys
 
 /gate/source/radSource/visualize 3000 green 5
 
-/gate/application/setTotalNumberOfPrimaries 100
+/gate/application/setTotalNumberOfPrimaries 100000
 /gate/application/start #Start er up!
