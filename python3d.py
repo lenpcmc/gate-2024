@@ -8,19 +8,13 @@ def plot3d(file):
     fig=plt.figure()
     ax=fig.add_subplot(projection='3d')
     for line in infile:
-        line=line.strip()
-        line = line.split()
-        time = line[7]
-        edep= line[9]
-        posX=line[9]
-        posY=line[10]
-        posZ=line[11]
+        posX=float((line.strip()).split()[9])
+        posY=float((line.strip()).split()[10])
+        posZ=float((line.strip()).split()[11])
         ax.scatter(posX,posY,posZ,marker=1)
     ax.set_xlabel('X position')
     ax.set_ylabel('Y position')
     ax.set_zlabel('Z position')
-
-
     plt.show()
     infile.close()
 
