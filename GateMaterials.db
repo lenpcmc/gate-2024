@@ -36,7 +36,7 @@ Silver:     S= Ag  ; Z= 47. ; A= 107.868 g/mole
 Cadmium:    S= Cd  ; Z= 48. ; A= 112.41  g/mole
 Tin:        S= Sn  ; Z= 50. ; A= 118.71  g/mole
 Tellurium:  S= Te  ; Z= 52. ; A= 127.6   g/mole
-Iodine      S= I   ; Z= 53. ; A= 126.90  g/mole
+Iodine:      S= I   ; Z= 53. ; A= 126.90  g/mole
 Cesium:     S= Cs  ; Z= 55. ; A= 132.905 g/mole
 Gadolinium: S= Gd  ; Z= 64. ; A= 157.25  g/mole
 Lutetium:   S= Lu  ; Z= 71. ; A= 174.97  g/mole
@@ -47,11 +47,17 @@ Bismuth:    S= Bi  ; Z= 83. ; A= 208.98  g/mole
 Uranium:    S= U   ; Z= 92. ; A= 238.03  g/mole
 Europium:   S= Eu  ; Z= 63. ; A= 151.964 g/mole
 Gold:       S= Au  ; Z= 79  ; A= 197.0   g/mole
+Strontium:  S= Sr  ; Z= 38  ; A=  89.9  g/mole
 
 [Materials]
 Vacuum: d=0.000001 mg/cm3 ; n=1 
 	+el: name=Hydrogen ; n=1
 
+Strontium-90: d=2.64 g/cm3 ; n=1 ; state=solid
+	+el: name=Strontium ; n=1
+
+Gold:    d=19.3 g/cm3     ; n=1
+    +el: name=auto        ; n=1
 Aluminium: d=2.7 g/cm3 ; n=1 ; state=solid
 	+el: name=auto ; n=1
 
@@ -480,6 +486,12 @@ Polystyrene: d=1.05 g/cm3;   n=2
         +el: name=Carbon;    n=8
         +el: name=Hydrogen;  n=8
 
+ppo:    d=1.06 g/cm3;          n=4
+        +el: name=Carbon;      n=15
+        +el: name=Hydrogen;    n=1
+        +el: name=Oxygen;      n=1
+        +el: name=Nitrogen;      n=1
+
 ScintX: d=0.96 g/cm3;          n=4
         +mat: name=Ptp        ;   f= 0.009814
         +mat: name=BisMSB     ;   f= 0.0009814
@@ -491,3 +503,15 @@ ScintY: d=1.05 g/cm3;          n=3
         +mat: name=BisMSB     ;   f= 0.000196
         +mat: name=Polystyrene;   f= 0.9802
 
+ptpppo: d=0.96 g/cm3; n=3
+        +mat: name=Polystyrene;   f= 0.9877
+        +mat: name=Ptp;           f= 0.0112
+        +mat: name = ppo;         f=0.000116
+
+ETape:  d=1.1 g/cm3; n=3
+        +el: name=Carbon;         n=2
+        +el: name=Hydrogen;        n=3
+        +el: name=Chlorine;        n=1
+
+Graphite: d=2.26 g/cm3; n=1
+        +el: name=Carbon;       n=1

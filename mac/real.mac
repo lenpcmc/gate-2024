@@ -1,0 +1,117 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength 1 m
+/gate/world/geometry/setYLength 1 m
+/gate/world/geometry/setZLength 1 m
+/gate/world/setMaterial Air
+
+
+
+
+##################################################################################################################################
+#OpticalSystem (detector)
+
+# Create the Optical Imaging system, which will yield a binary output of the projection data
+/gate/world/daughters/name OpticalSystem1
+/gate/world/daughters/systemType OpticalSystem
+/gate/world/daughters/insert cylinder
+
+# Define the dimensions, position and material
+/gate/OpticalSystem1/geometry/setRmin 0 cm
+/gate/OpticalSystem1/geometry/setRmax 3.175 cm
+/gate/OpticalSystem1/geometry/setHeight .635 cm
+/gate/OpticalSystem1/geometry/setPhiStart 0 rad
+/gate/OpticalSystem1/geometry/setDeltaPhi 6.28 rad
+/gate/OpticalSystem1/placement/setTranslation 15. 0. 0. cm
+/gate/OpticalSystem1/placement/setRotationAngle 90 deg
+/gate/OpticalSystem1/placement/setRotationAxis 0 1 0
+/gate/OpticalSystem1/setMaterial LYSO
+
+# Define pixelated detector:
+/gate/OpticalSystem1/daughters/name crystal
+/gate/OpticalSystem1/daughters/insert cylinder
+/gate/crystal/geometry/setRmin 0 cm
+/gate/crystal/geometry/setRmax 3.175 cm
+/gate/crystal/geometry/setHeight .635 cm
+/gate/crystal/setMaterial LYSO
+/gate/systems/OpticalSystem1/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert cylinder
+/gate/pixel/geometry/setRmin 0 cm
+/gate/pixel/geometry/setRmax 3.175 cm
+/gate/pixel/geometry/setHeight .00635 cm
+/gate/pixel/setMaterial LYSO
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 100
+/gate/pixel/linear/setRepeatVector .00635 0 0 cm
+/gate/pixel/attachCrystalSD
+/gate/systems/OpticalSystem1/pixel/attach pixel
+###########################################################################################################################################
+
+/gate/world/daughters/name brickperpz1
+/gate/world/daughters/insert box
+/gate/brickperpz1/geometry/setXLength 20 cm
+/gate/brickperpz1/geometry/setYLength 10 cm
+/gate/brickperpz1/geometry/setZLength 10 cm
+/gate/brickperpz1/placement/setTranslation 0 0 8 cm
+/gate/brickperpz1/setMaterial Lead
+
+/gate/world/daughters/name brickperpz2
+/gate/world/daughters/insert box
+/gate/brickperpz2/geometry/setXLength 20 cm
+/gate/brickperpz2/geometry/setYLength 10 cm
+/gate/brickperpz2/geometry/setZLength 10 cm
+/gate/brickperpz2/placement/setTranslation 0 0 -8 cm
+/gate/brickperpz2/setMaterial Lead
+
+/gate/world/daughters/name brickperpx1
+/gate/world/daughters/insert box
+/gate/brickperpx1/geometry/setXLength 2 cm
+/gate/brickperpx1/geometry/setYLength 10 cm
+/gate/brickperpx1/geometry/setZLength 6 cm
+/gate/brickperpx1/placement/setTranslation 11 0 4 cm
+/gate/brickperpx1/setMaterial Aluminium
+
+/gate/world/daughters/name brickperpx2
+/gate/world/daughters/insert box
+/gate/brickperpx2/geometry/setXLength 2 cm
+/gate/brickperpx2/geometry/setYLength 10 cm
+/gate/brickperpx2/geometry/setZLength 6 cm
+/gate/brickperpx2/placement/setTranslation 11 0 -4 cm
+/gate/brickperpx2/setMaterial Aluminium
+
+#eDep
+/gate/actor/addActor DoseActor edepReadout
+/gate/actor/edepReadout/save output/realoutput.txt
+/gate/actor/edepReadout/stepHitType random
+/gate/actor/edepReadout/attachTo OpticalSystem1
+/gate/actor/edepReadout/setSize 200 200 200 m
+/gate/actor/edepReadout/setResolution 1 1 1
+/gate/actor/edepReadout/enableDose false
+/gate/actor/edepReadout/enableEdep true
+
+#Physics
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Actors
+/gate/source/addSource elec
+/gate/source/elec/gps/particle e-
+/gate/source/elec/gps/energytype Mono
+/gate/source/elec/gps/monoenergy 2 MeV
+/gate/source/elec/gps/angtype iso
+/gate/source/elec/gps/mintheta 0 deg
+/gate/source/elec/gps/maxtheta 180 deg
+/gate/source/elec/gps/minphi 90 deg
+/gate/source/elec/gps/maxphi 270 deg
+
+/control/execute visu.mac
+
+/gate/application/setTotalNumberOfPrimaries 40
+/gate/application/start

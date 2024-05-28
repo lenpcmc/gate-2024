@@ -1,0 +1,47 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength 2 m
+/gate/world/geometry/setYLength 1 m
+/gate/world/geometry/setZLength 1 m
+/gate/world/setMaterial Air
+
+/gate/world/daughters/name scintil
+/gate/world/daughters/insert box
+/gate/scintil/geometry/setXLength .2 m 
+/gate/scintil/geometry/setYLength .2 m 
+/gate/scintil/geometry/setZLength .2 m 
+/gate/scintil/placement/setTranslation 50. 0. 0. cm
+/gate/scintil/setMaterial LYSO
+
+#Physics
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+#eDep
+/gate/actor/addActor DoseActor edepReadout
+/gate/actor/edepReadout/save LYSO1out-{energy}.txt
+/gate/actor/edepReadout/stepHitType random
+/gate/actor/edepReadout/attachTo scintil
+/gate/actor/edepReadout/setSize 200 200 200 mm
+/gate/actor/edepReadout/setResolution 200 1 1
+/gate/actor/edepReadout/enableDose false
+/gate/actor/edepReadout/enableEdep true
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Actors
+/gate/source/addSource stream
+/gate/source/stream/gps/particle proton
+/gate/source/stream/gps/energytype Mono
+/gate/source/stream/gps/monoenergy 1000 MeV
+/gate/source/stream/gps/direction 1 0 0
+
+/control/execute visu.mac
+
+/gate/output/allowNoOutput
+
+/gate/application/setTotalNumberOfPrimaries 100
+/gate/application/start
