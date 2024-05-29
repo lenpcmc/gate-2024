@@ -104,5 +104,5 @@
 /gate/output/root/setFileName output/electapesimROOT
 /gate/output/root/setRootHitFlag 1
 
-/gate/application/setTotalNumberOfPrimaries 100
+/gate/application/setTotalNumberOfPrimaries 1000000
 /gate/application/start
