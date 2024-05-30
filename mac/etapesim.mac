@@ -97,6 +97,7 @@
 /gate/source/elec/gps/maxtheta 180 deg
 /gate/source/elec/gps/minphi 90 deg
 /gate/source/elec/gps/maxphi 270 deg
+/gate/source/elec/visualize 10 yellow 1
 
 /control/execute visu.mac
 
@@ -104,5 +105,5 @@
 #/gate/output/root/setFileName output/electapesimROOT
 #/gate/output/root/setRootHitFlag 1
 
-/gate/application/setTotalNumberOfPrimaries 100
+/gate/application/setTotalNumberOfPrimaries 10
 /gate/application/start

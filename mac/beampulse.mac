@@ -1,0 +1,86 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength 2 m
+/gate/world/geometry/setYLength 1 m
+/gate/world/geometry/setZLength 1 m
+/gate/world/setMaterial Air
+
+/gate/world/daughters/name OpticalSystem
+/gate/world/daughters/insert box
+/gate/OpticalSystem/geometry/setXLength 1 cm 
+/gate/OpticalSystem/geometry/setYLength 10 cm 
+/gate/OpticalSystem/geometry/setZLength 10 cm 
+/gate/OpticalSystem/placement/setTranslation 60. 0. 0. cm
+/gate/OpticalSystem/setMaterial ptpppo
+
+# Define pixelated detector:
+/gate/OpticalSystem/daughters/name crystal
+/gate/OpticalSystem/daughters/insert box
+/gate/crystal/geometry/setXLength 1 cm
+/gate/crystal/geometry/setYLength 10 cm
+/gate/crystal/geometry/setZLength 10 cm
+/gate/crystal/setMaterial ptpppo
+/gate/systems/OpticalSystem/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert box
+/gate/pixel/geometry/setXLength .1 cm
+/gate/pixel/geometry/setYLength 10 cm
+/gate/pixel/geometry/setZLength 10 cm
+/gate/pixel/setMaterial ptpppo
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 10
+/gate/pixel/linear/setRepeatVector .1 0 0 cm
+/gate/pixel/attachCrystalSD
+/gate/systems/OpticalSystem/pixel/attach pixel
+
+
+#Physics
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Actors
+/gate/source/addSource beam
+/gate/source/beam/gps/particle e-
+/gate/source/beam/gps/energytype Mono
+/gate/source/beam/gps/monoenergy 10 MeV
+/gate/source/beam/gps/direction 0 1 0
+/gate/source/beam/gps/type Volume
+/gate/source/beam/gps/shape Sphere
+/gate/source/beam/gps/radius .2 cm #get exact dimensions of pulse
+/gate/source/beam/gps/centre -10 0 0 cm
+/gate/source/beam/visualize 10000 green 2
+
+/gate/source/addSource beam1
+/gate/source/beam1/gps/particle e-
+/gate/source/beam1/gps/energytype Mono
+/gate/source/beam1/gps/monoenergy 10 MeV
+/gate/source/beam1/gps/direction 0 1 0
+/gate/source/beam1/gps/type Volume
+/gate/source/beam1/gps/shape Sphere
+/gate/source/beam1/gps/radius .2 cm #get exact dimensions of pulse
+/gate/source/beam1/gps/centre -12 0 0 cm
+/gate/source/beam1/visualize 10000 yellow 2
+
+/gate/source/addSource beam2
+/gate/source/beam2/gps/particle e-
+/gate/source/beam2/gps/energytype Mono
+/gate/source/beam2/gps/monoenergy 10 MeV
+/gate/source/beam2/gps/direction 0 1 0
+/gate/source/beam2/gps/type Volume
+/gate/source/beam2/gps/shape Sphere
+/gate/source/beam2/gps/radius .2 cm #get exact dimensions of pulse
+/gate/source/beam2/gps/centre -8 0 0 cm
+/gate/source/beam2/visualize 10000 cyan 2
+
+/control/execute visu.mac
+
+/gate/output/allowNoOutput
+
+/gate/application/setTotalNumberOfPrimaries 10
+/gate/application/start
