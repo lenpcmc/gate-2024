@@ -14,11 +14,12 @@ plt.show()
 def landau_dist(a,b,c):
     return a*(np.exp(b/X)/(X*(c+X)))
 
-curve_fit(landau_dist,X,Y,p0=[5646,1144],maxfev=100000)
+def solu(n, x):
+    return quad(landau_dist, 1, np.inf, args=(n, x))[0]
 
-p_par,p_cov = curve_fit(landau_dist,X,Y,p0=[10,5],maxfev=10000)
+curve_fit(solu,X,Y,p0=[5646,1144],maxfev=1000000)
 
-Y_fit = landau_dist(X,5.22354534e+02,3.52235334e-01)
+Y_fit = solu(X,5.22354534e+02,3.52235334e-01)
 
 plt.scatter(X,Y)
 plt.scatter(X,Y_fit,color='red')
