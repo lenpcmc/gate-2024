@@ -52,36 +52,36 @@
 /gate/source/beam/gps/direction 1 0 0
 /gate/source/beam/gps/type Volume
 /gate/source/beam/gps/shape Sphere
-/gate/source/beam/gps/radius .2 cm #get exact dimensions of pulse
+/gate/source/beam/gps/radius 6 mm #get exact dimensions of pulse
 /gate/source/beam/gps/centre -10 0 0 cm
 /gate/source/beam/visualize 10000 green 2
 
 /gate/source/addSource beam1
 /gate/source/beam1/gps/particle e-
 /gate/source/beam1/gps/energytype Mono
-/gate/source/beam1/gps/monoenergy 10 MeV
+/gate/source/beam1/gps/monoenergy 20 MeV
 /gate/source/beam1/gps/direction 1 0 0
 /gate/source/beam1/gps/type Volume
 /gate/source/beam1/gps/shape Sphere
-/gate/source/beam1/gps/radius .2 cm #get exact dimensions of pulse
+/gate/source/beam1/gps/radius 6 mm #get exact dimensions of pulse
 /gate/source/beam1/gps/centre -12 0 0 cm
 /gate/source/beam1/visualize 10000 yellow 2
 
 /gate/source/addSource beam2
 /gate/source/beam2/gps/particle e-
 /gate/source/beam2/gps/energytype Mono
-/gate/source/beam2/gps/monoenergy  MeV
+/gate/source/beam2/gps/monoenergy 20 MeV
 /gate/source/beam2/gps/direction 1 0 0
 /gate/source/beam2/gps/type Volume
 /gate/source/beam2/gps/shape Sphere
-/gate/source/beam2/gps/radius .2 cm #get exact dimensions of pulse
+/gate/source/beam2/gps/radius 6 mm #get exact dimensions of pulse
 /gate/source/beam2/gps/centre -8 0 0 cm
 /gate/source/beam2/visualize 10000 cyan 2
 
 /gate/source/addSource beam3
 /gate/source/beam3/gps/particle e-
 /gate/source/beam3/gps/energytype Mono
-/gate/source/beam3/gps/monoenergy 2 MeV
+/gate/source/beam3/gps/monoenergy 20 MeV
 /gate/source/beam3/gps/direction 1 0 0
 /gate/source/beam3/gps/type Volume
 /gate/source/beam3/gps/shape Sphere
