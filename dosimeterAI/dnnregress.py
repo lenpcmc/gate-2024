@@ -9,7 +9,7 @@ np.set_printoptions(precision=3, suppress=True)
 import tensorflow as tf
 
 from tensorflow import keras
-from tensorflow.keras import layers
+from keras import layers
 
 print(tf.__version__)
 
@@ -55,6 +55,15 @@ history = dnn_model.fit(
     train_labels,
     validation_split=0.2,
     verbose=0, epochs=100)
+
+def plot_loss(history):
+  plt.plot(history.history['loss'], label='loss')
+  plt.plot(history.history['val_loss'], label='val_loss')
+  plt.ylim([0, 10])
+  plt.xlabel('Epoch')
+  plt.ylabel('Error [MPG]')
+  plt.legend()
+  plt.grid(True)
 
 plot_loss(history)
 
