@@ -40,8 +40,7 @@
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
 
-#/gate/geometry/setElectMagTabulateField3D /home/vgate/src/gate-2024/mac/BPelecfield.txt
-
+/gate/geometry/setElectMagTabulateField3D /home/vgate/src/gate-2024/mac/BPefield.txt
 
 #Initialization
 /gate/geometry/rebuild
@@ -58,6 +57,19 @@
 /gate/source/beam/gps/radius 6 mm #get exact dimensions of pulse
 /gate/source/beam/gps/centre 0 0 0 cm
 /gate/source/beam/visualize 10000 green 2
+
+/gate/source/addSource volt
+/gate/source/volt/gps/particle proton
+/gate/source/volt/gps/energytype Mono
+/gate/source/volt/gps/monoenergy 3 MeV
+/gate/source/volt/gps/direction 1 0 0
+/gate/source/volt/gps/type Volume
+/gate/source/volt/gps/shape Rectangle
+/gate/source/volt/gps/halfx 25 cm
+/gate/source/volt/gps/halfy .1 cm
+/gate/source/volt/gps/halfz 10 cm
+/gate/source/volt/gps/centre 30 5 0 cm
+/gate/source/volt/visualize 10000 green 2
 
 #/gate/source/addSource beam1
 #/gate/source/beam1/gps/particle e-
@@ -85,5 +97,5 @@
 
 /gate/output/allowNoOutput
 
-/gate/application/setTotalNumberOfPrimaries 100
+/gate/application/setTotalNumberOfPrimaries 1000
 /gate/application/start

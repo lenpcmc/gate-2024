@@ -1,3 +1,0 @@
-#x y z Ex Ey Ez Bx By Bz
-1 1 1
-
