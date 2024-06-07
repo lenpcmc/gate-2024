@@ -13,7 +13,7 @@
 /gate/plate/geometry/setYLength 1 cm
 /gate/plate/geometry/setZLength 10 cm
 /gate/plate/placement/setTranslation 30 10 0 cm
-/gate/plate/setMaterial Copper
+/gate/plate/setMaterial Gold
 
 /gate/world/daughters/name OpticalSystem
 /gate/world/daughters/insert box
