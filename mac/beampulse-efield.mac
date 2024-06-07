@@ -7,6 +7,14 @@
 /gate/world/geometry/setZLength 2 m
 /gate/world/setMaterial Air
 
+/gate/world/daughters/name plate
+/gate/world/daughters/insert box
+/gate/plate/geometry/setXLength 60 cm
+/gate/plate/geometry/setYLength 1 cm
+/gate/plate/geometry/setZLength 10 cm
+/gate/plate/geometry/placement/setTranslation 30 10 0
+/gate/plate/setMaterial Copper
+
 /gate/world/daughters/name OpticalSystem
 /gate/world/daughters/insert box
 /gate/OpticalSystem/geometry/setXLength 1 cm 
@@ -40,7 +48,7 @@
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
 
-/gate/geometry/setElectMagTabulateField3D /home/vgate/src/gate-2024/mac/BPefield.txt
+####/gate/geometry/setElectMagTabulateField3D /home/vgate/src/gate-2024/mac/BPefield.txt
 
 #Initialization
 /gate/geometry/rebuild
@@ -57,19 +65,6 @@
 /gate/source/beam/gps/radius 6 mm #get exact dimensions of pulse
 /gate/source/beam/gps/centre 0 0 0 cm
 /gate/source/beam/visualize 10000 green 2
-
-/gate/source/addSource volt
-/gate/source/volt/gps/particle proton
-/gate/source/volt/gps/energytype Mono
-/gate/source/volt/gps/monoenergy 3 MeV
-/gate/source/volt/gps/direction 1 0 0
-/gate/source/volt/gps/type Volume
-/gate/source/volt/gps/shape Rectangle
-/gate/source/volt/gps/halfx 25 cm
-/gate/source/volt/gps/halfy .1 cm
-/gate/source/volt/gps/halfz 10 cm
-/gate/source/volt/gps/centre 30 5 0 cm
-/gate/source/volt/visualize 10000 green 2
 
 #/gate/source/addSource beam1
 #/gate/source/beam1/gps/particle e-
