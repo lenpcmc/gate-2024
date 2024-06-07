@@ -26,13 +26,13 @@
 
 /gate/crystal/daughters/name pixel
 /gate/crystal/daughters/insert box
-/gate/pixel/geometry/setXLength .1 cm
+/gate/pixel/geometry/setXLength .01 cm
 /gate/pixel/geometry/setYLength 10 cm
 /gate/pixel/geometry/setZLength 10 cm
 /gate/pixel/setMaterial ptpppo
 /gate/pixel/repeaters/insert linear
-/gate/pixel/linear/setRepeatNumber 10
-/gate/pixel/linear/setRepeatVector .1 0 0 cm
+/gate/pixel/linear/setRepeatNumber 100
+/gate/pixel/linear/setRepeatVector .01 0 0 cm
 /gate/pixel/attachCrystalSD
 /gate/systems/OpticalSystem/pixel/attach pixel
 
@@ -41,7 +41,7 @@
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
 
 #/gate/geometry/setElectMagTabulateField3D /home/vgate/src/gate-2024/mac/BPelecfield.txt
-#/gate/geometry/setMagField 0 0 .05 T
+#/gate/geometry/setMagField 0 0 .1 T
 
 #Initialization
 /gate/geometry/rebuild
@@ -83,7 +83,9 @@
 
 /control/execute visu.mac
 
-/gate/output/allowNoOutput
+/gate/output/root/enable
+/gate/output/root/setFileName output/beampulse-bfieldOUTPUT
+/gate/output/root/setRootHitFlag 1
 
 /gate/application/setTotalNumberOfPrimaries 100
 /gate/application/start
