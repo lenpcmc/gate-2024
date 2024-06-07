@@ -47,6 +47,7 @@
 
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+/gate/physics/addPhysicsList QGSP_BERT_EMV
 
 /gate/geometry/setElectMagTabulateField3D /home/vgate/src/gate-2024/mac/BPefield.txt
 
@@ -58,7 +59,7 @@
 /gate/source/addSource beam
 /gate/source/beam/gps/particle e-
 /gate/source/beam/gps/energytype Mono
-/gate/source/beam/gps/monoenergy 20 MeV
+/gate/source/beam/gps/monoenergy 1 MeV
 /gate/source/beam/gps/direction 1 0 0
 /gate/source/beam/gps/type Volume
 /gate/source/beam/gps/shape Sphere
@@ -92,5 +93,5 @@
 
 /gate/output/allowNoOutput
 
-/gate/application/setTotalNumberOfPrimaries 1000
+/gate/application/setTotalNumberOfPrimaries 100
 /gate/application/start
