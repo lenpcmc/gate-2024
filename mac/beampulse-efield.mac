@@ -7,13 +7,13 @@
 /gate/world/geometry/setZLength 2 m
 /gate/world/setMaterial Air
 
-#/gate/world/daughters/name plate
-#/gate/world/daughters/insert box
-#/gate/plate/geometry/setXLength 60 cm
-#/gate/plate/geometry/setYLength 1 cm
-#/gate/plate/geometry/setZLength 10 cm
-#/gate/plate/placement/setTranslation 30 10 0 cm
-#/gate/plate/setMaterial Gold
+/gate/world/daughters/name plate
+/gate/world/daughters/insert box
+/gate/plate/geometry/setXLength 60 cm
+/gate/plate/geometry/setYLength 1 cm
+/gate/plate/geometry/setZLength 10 cm
+/gate/plate/placement/setTranslation 30 10 0 cm
+/gate/plate/setMaterial Gold
 
 /gate/world/daughters/name OpticalSystem
 /gate/world/daughters/insert box
