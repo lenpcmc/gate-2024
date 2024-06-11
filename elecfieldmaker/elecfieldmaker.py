@@ -20,7 +20,7 @@ def zmake(y2):
    x3 = x
    z3 = z
    for i in range(z3):
-           f.write(str(x3) + '\t' + str(y2) + '\t' + str(z3) + '\t' + str(ex) + '\t' + str(ey) + '\t' + str(ez) + '\t' + str(bx) + '\t' + str(by) + '\t' + str(bz) + '\n')
+           f.write(str(x3) + '\t' + str(y2) + '\t' + str(z3) + '\t' + str(ex) + '\t' + str(ey) + '\t' + str(ez) + '\n') ###+ '\t' + str(bx) + '\t' + str(by) + '\t' + str(bz) + '\n')
            z3 += -1
 
 
