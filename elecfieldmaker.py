@@ -8,8 +8,7 @@ bx = int(input('Bx = ?: '))
 by = int(input('By = ?: '))
 bz = int(input('Bz = ?: '))
 
-
-f = open('mac/BPefield.txt', 'a')
+f = open('mac/practicesims/BPefield.txt', 'a')
 f.write('#x\ty\tz\tEx\tEy\tEz\tBx\tBy\tBz\n')
 
 

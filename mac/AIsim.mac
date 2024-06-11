@@ -44,6 +44,17 @@
 /gate/pixel/attachCrystalSD
 /gate/systems/OpticalSystem/pixel/attach pixel
 
+#eDep output
+/gate/actor/addActor DoseActor eDepsense
+/gate/actor/eDepsense/attachTo patient
+/gate/actor/eDepsense/enableEdep             true
+/gate/actor/eDepsense/enableUncertaintyEdep  false
+/gate/actor/eDepsense/enableSquaredEdep      false
+/gate/actor/eDepsense/enableDose             false
+/gate/actor/eDepsense/enableUncertaintyDose  false
+/gate/actor/eDepsense/enableSquaredDose      false
+/gate/actor/eDepsense/enableNumberOfHits     false
+/gate/actor/eDepsense/save output/eDep/AIsim.txt
 
 #Physics
 /gate/physics/addPhysicsList G4EmStandardPhysics #Use higher _opt(number) suffix for more precision
@@ -63,15 +74,6 @@
 /gate/source/beam/gps/radius 6 mm #get exact dimensions of pulse
 /gate/source/beam/gps/centre 0 0 0 cm
 /gate/source/beam/visualize 10000 green 2
-
-/gate/actor/addActor DoseActor bob
-/gate/actor/bob/enableEdep true
-/gate/actor/bob/save bob.txt
-/gate/actor/bob/attachTo patient
-/gate/actor/bob/stepHitType random
-/gate/actor/bob/setSize 10 10 10 m
-/gate/actor/bob/setResolution 1 1 50
-
 
 /control/execute visu.mac
 
