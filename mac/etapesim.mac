@@ -53,7 +53,7 @@
 
 /gate/world/daughters/name etape
 /gate/world/daughters/insert cylinder
-/gate/etape/geometry/setRmin 0 cm
+/gate/etape/geometry/setRmin 2.7 cm
 /gate/etape/geometry/setRmax 3.175 cm
 /gate/etape/geometry/setHeight .1 cm
 /gate/etape/placement/setTranslation .6 0 0 cm
@@ -70,15 +70,6 @@
 /gate/actor/edepReadout/setResolution 1 1 1
 /gate/actor/edepReadout/enableDose false
 /gate/actor/edepReadout/enableEdep true
-
-/gate/actor/addActor DoseActor edepRead
-/gate/actor/edepRead/save output/etapesim(scintillator).txt
-/gate/actor/edepRead/stepHitType random
-/gate/actor/edepRead/attachTo OpticalSystem1
-/gate/actor/edepRead/setSize 200 200 200 mm
-/gate/actor/edepRead/setResolution 1 1 1
-/gate/actor/edepRead/enableDose false
-/gate/actor/edepRead/enableEdep true
 
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
@@ -97,13 +88,12 @@
 /gate/source/elec/gps/maxtheta 180 deg
 /gate/source/elec/gps/minphi 90 deg
 /gate/source/elec/gps/maxphi 270 deg
-/gate/source/elec/visualize 10 yellow 1
 
 /control/execute visu.mac
 
-#/gate/output/root/enable
-#/gate/output/root/setFileName output/electapesimROOT
-#/gate/output/root/setRootHitFlag 1
+/gate/output/root/enable
+/gate/output/root/setFileName output/upcloseROOT
+/gate/output/root/setRootHitFlag 1
 
-/gate/application/setTotalNumberOfPrimaries 10
+/gate/application/setTotalNumberOfPrimaries 1000
 /gate/application/start

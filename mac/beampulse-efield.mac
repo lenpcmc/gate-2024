@@ -2,10 +2,18 @@
 /gate/geometry/setMaterialDatabase GateMaterials.db 
 
 #Geometries
-/gate/world/geometry/setXLength 2 m
-/gate/world/geometry/setYLength 1 m
-/gate/world/geometry/setZLength 1 m
+/gate/world/geometry/setXLength 5 m
+/gate/world/geometry/setYLength 2 m
+/gate/world/geometry/setZLength 2 m
 /gate/world/setMaterial Air
+
+#/gate/world/daughters/name plate
+#/gate/world/daughters/insert box
+#/gate/plate/geometry/setXLength 60 cm
+#/gate/plate/geometry/setYLength 1 cm
+#/gate/plate/geometry/setZLength 10 cm
+#/gate/plate/placement/setTranslation 30 10 0 cm
+#/gate/plate/setMaterial Gold
 
 /gate/world/daughters/name OpticalSystem
 /gate/world/daughters/insert box
@@ -39,6 +47,9 @@
 
 #Physics
 /gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+/gate/physics/addPhysicsList QGSP_BERT_EMV
+
+/gate/geometry/setElectMagTabulateField3D /home/vgate/src/gate-2024/mac/BPefield.txt
 
 #Initialization
 /gate/geometry/rebuild
@@ -48,46 +59,35 @@
 /gate/source/addSource beam
 /gate/source/beam/gps/particle e-
 /gate/source/beam/gps/energytype Mono
-/gate/source/beam/gps/monoenergy 10 MeV
+/gate/source/beam/gps/monoenergy 20 MeV
 /gate/source/beam/gps/direction 1 0 0
 /gate/source/beam/gps/type Volume
 /gate/source/beam/gps/shape Sphere
-/gate/source/beam/gps/radius .2 cm #get exact dimensions of pulse
-/gate/source/beam/gps/centre -10 0 0 cm
+/gate/source/beam/gps/radius 6 mm #get exact dimensions of pulse
+/gate/source/beam/gps/centre 0 0 0 cm
 /gate/source/beam/visualize 10000 green 2
 
-/gate/source/addSource beam1
-/gate/source/beam1/gps/particle e-
-/gate/source/beam1/gps/energytype Mono
-/gate/source/beam1/gps/monoenergy 10 MeV
-/gate/source/beam1/gps/direction 1 0 0
-/gate/source/beam1/gps/type Volume
-/gate/source/beam1/gps/shape Sphere
-/gate/source/beam1/gps/radius .2 cm #get exact dimensions of pulse
-/gate/source/beam1/gps/centre -12 0 0 cm
-/gate/source/beam1/visualize 10000 yellow 2
-
-/gate/source/addSource beam2
-/gate/source/beam2/gps/particle e-
-/gate/source/beam2/gps/energytype Mono
-/gate/source/beam2/gps/monoenergy  MeV
-/gate/source/beam2/gps/direction 1 0 0
-/gate/source/beam2/gps/type Volume
-/gate/source/beam2/gps/shape Sphere
-/gate/source/beam2/gps/radius .2 cm #get exact dimensions of pulse
-/gate/source/beam2/gps/centre -8 0 0 cm
-/gate/source/beam2/visualize 10000 cyan 2
-
-/gate/source/addSource beam3
-/gate/source/beam3/gps/particle e-
-/gate/source/beam3/gps/energytype Mono
-/gate/source/beam3/gps/monoenergy 2 MeV
-/gate/source/beam3/gps/direction 1 0 0
-/gate/source/beam3/gps/type Volume
-/gate/source/beam3/gps/shape Sphere
-/gate/source/beam3/gps/radius .2 cm #get exact dimensions of pulse
-/gate/source/beam3/gps/centre -14 0 0 cm #get exact distance between pulses
-/gate/source/beam3/visualize 10000 cyan 2
+#/gate/source/addSource beam1
+#/gate/source/beam1/gps/particle e-
+#/gate/source/beam1/gps/energytype Mono
+#/gate/source/beam1/gps/monoenergy 1 MeV
+#/gate/source/beam1/gps/direction 1 0 0
+#/gate/source/beam1/gps/type Volume
+#/gate/source/beam1/gps/shape Sphere
+#/gate/source/beam1/gps/radius 6 mm #get exact dimensions of pulse
+#/gate/source/beam1/gps/centre -1 0 0 m
+#/gate/source/beam1/visualize 10000 yellow 2
+#
+#/gate/source/addSource beam2
+#/gate/source/beam2/gps/particle e-
+#/gate/source/beam2/gps/energytype Mono
+#/gate/source/beam2/gps/monoenergy 1 MeV
+#/gate/source/beam2/gps/direction 1 0 0
+#/gate/source/beam2/gps/type Volume
+#/gate/source/beam2/gps/shape Sphere
+#/gate/source/beam2/gps/radius 6 mm #get exact dimensions of pulse
+#/gate/source/beam2/gps/centre -2 0 0 m
+#/gate/source/beam2/visualize 10000 cyan 2
 
 /control/execute visu.mac
 
