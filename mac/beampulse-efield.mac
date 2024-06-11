@@ -46,10 +46,9 @@
 
 
 #Physics
-/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
-/gate/physics/addPhysicsList QGSP_BERT_EMV
+/gate/geometry/setElectMagTabulateField3D /home/uakgun/src/gate-2024/mac/BPefield.txt
 
-/gate/geometry/setElectMagTabulateField3D /home/vgate/src/gate-2024/mac/BPefield.txt
+/gate/physics/addPhysicsList G4EmStandardPhysics #Use higher _opt(number) suffix for more precision
 
 #Initialization
 /gate/geometry/rebuild
