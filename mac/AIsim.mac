@@ -1,0 +1,79 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength 5 m
+/gate/world/geometry/setYLength 2 m
+/gate/world/geometry/setZLength 2 m
+/gate/world/setMaterial Air
+
+/gate/world/daughters/name OpticalSystem
+/gate/world/daughters/insert box
+/gate/OpticalSystem/geometry/setXLength 1 cm 
+/gate/OpticalSystem/geometry/setYLength 10 cm 
+/gate/OpticalSystem/geometry/setZLength 10 cm 
+/gate/OpticalSystem/placement/setTranslation 60. 0. 0. cm
+/gate/OpticalSystem/setMaterial ptpppo
+
+/gate/world/daughters/name patient
+/gate/world/daughters/insert box
+/gate/patient/geometry/setXLength 50 cm 
+/gate/patient/geometry/setYLength 50 cm 
+/gate/patient/geometry/setZLength 50 cm 
+/gate/patient/placement/setTranslation 100. 0. 0. cm
+/gate/patient/setMaterial Water
+
+# Define pixelated detector:
+/gate/OpticalSystem/daughters/name crystal
+/gate/OpticalSystem/daughters/insert box
+/gate/crystal/geometry/setXLength 1 cm
+/gate/crystal/geometry/setYLength 10 cm
+/gate/crystal/geometry/setZLength 10 cm
+/gate/crystal/setMaterial ptpppo
+/gate/systems/OpticalSystem/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert box
+/gate/pixel/geometry/setXLength .1 cm
+/gate/pixel/geometry/setYLength 10 cm
+/gate/pixel/geometry/setZLength 10 cm
+/gate/pixel/setMaterial ptpppo
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 10
+/gate/pixel/linear/setRepeatVector .1 0 0 cm
+/gate/pixel/attachCrystalSD
+/gate/systems/OpticalSystem/pixel/attach pixel
+
+
+#Physics
+/gate/physics/addPhysicsList G4EmStandardPhysics #Use higher _opt(number) suffix for more precision
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Actors
+/gate/source/addSource beam
+/gate/source/beam/gps/particle e-
+/gate/source/beam/gps/energytype Mono
+/gate/source/beam/gps/monoenergy 20 MeV
+/gate/source/beam/gps/direction 1 0 0
+/gate/source/beam/gps/type Volume
+/gate/source/beam/gps/shape Sphere
+/gate/source/beam/gps/radius 6 mm #get exact dimensions of pulse
+/gate/source/beam/gps/centre 0 0 0 cm
+/gate/source/beam/visualize 10000 green 2
+
+/gate/actor/addActor DoseActor bob
+/gate/actor/bob/enableEdep true
+/gate/actor/bob/save bob.txt
+/gate/actor/bob/attachTo patient
+/gate/actor/bob/stepHitType random
+/gate/actor/bob/setSize 10 10 10 m
+/gate/actor/bob/setResolution 1 1 50
+
+
+/control/execute visu.mac
+
+/gate/application/setTotalNumberOfPrimaries 10
+/gate/application/start
