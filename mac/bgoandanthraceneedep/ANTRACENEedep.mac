@@ -1,0 +1,99 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength 1 m
+/gate/world/geometry/setYLength 1 m
+/gate/world/geometry/setZLength 1 m
+/gate/world/setMaterial Air
+
+
+
+
+##################################################################################################################################
+#OpticalSystem (detector)
+
+# Create the Optical Imaging system, which will yield a binary output of the projection data
+/gate/world/daughters/name OpticalSystem
+/gate/world/daughters/systemType OpticalSystem
+/gate/world/daughters/insert cylinder
+
+# Define the dimensions, position and material
+/gate/OpticalSystem/geometry/setRmin 0 cm
+/gate/OpticalSystem/geometry/setRmax 3.175 cm
+/gate/OpticalSystem/geometry/setHeight .635 cm
+/gate/OpticalSystem/geometry/setPhiStart 0 rad
+/gate/OpticalSystem/geometry/setDeltaPhi 6.28 rad
+/gate/OpticalSystem/placement/setTranslation 1. 0. 0. cm
+/gate/OpticalSystem/placement/setRotationAngle 90 deg
+/gate/OpticalSystem/placement/setRotationAxis 0 1 0
+/gate/OpticalSystem/setMaterial Anthracene
+
+## Define pixelated detector:
+#/gate/OpticalSystem/daughters/name crystal
+#/gate/OpticalSystem/daughters/insert cylinder
+#/gate/crystal/geometry/setRmin 0 cm
+#/gate/crystal/geometry/setRmax 3.175 cm
+#/gate/crystal/geometry/setHeight .635 cm
+#/gate/crystal/setMaterial Ptp
+#/gate/systems/OpticalSystem/crystal/attach crystal
+#
+#/gate/crystal/daughters/name pixel
+#/gate/crystal/daughters/insert cylinder
+#/gate/pixel/geometry/setRmin 0 cm
+#/gate/pixel/geometry/setRmax 3.175 cm
+#/gate/pixel/geometry/setHeight .0635 cm
+#/gate/pixel/setMaterial Ptp
+#/gate/pixel/repeaters/insert linear
+#/gate/pixel/linear/setRepeatNumber 10
+#/gate/pixel/linear/setRepeatVector .0635 0 0 cm
+#/gate/pixel/attachCrystalSD
+#/gate/systems/OpticalSystem/pixel/attach pixel
+############################################################################################################################################
+
+#/gate/world/daughters/name alufoil
+#/gate/world/daughters/insert cylinder
+#/gate/etape/geometry/setRmin 2.7 cm
+#/gate/etape/geometry/setRmax 3.175 cm
+#/gate/etape/geometry/setHeight .1 cm
+#/gate/etape/placement/setTranslation .6 0 0 cm
+#/gate/etape/placement/setRotationAngle 90 deg
+#/gate/etape/placement/setRotationAxis 0 1 0
+#/gate/etape/setMaterial 
+#/gate/etape/vis/setColor white
+
+/gate/actor/addActor DoseActor edepReadout
+/gate/actor/edepReadout/save output/bgoandanthraceneedepoutput/ANTHRACENEedep.txt
+/gate/actor/edepReadout/stepHitType random
+/gate/actor/edepReadout/attachTo OpticalSystem
+/gate/actor/edepReadout/setSize 200 200 200 mm
+/gate/actor/edepReadout/setResolution 1 1 1
+/gate/actor/edepReadout/enableDose false
+/gate/actor/edepReadout/enableEdep true
+
+#Physics
+/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Actors
+/gate/source/addSource elec
+/gate/source/elec/gps/particle e-
+/gate/source/elec/gps/energytype Mono
+/gate/source/elec/gps/monoenergy 100000 MeV
+/gate/source/elec/gps/angtype iso
+/gate/source/elec/gps/mintheta 0 deg
+/gate/source/elec/gps/maxtheta 180 deg
+/gate/source/elec/gps/minphi 90 deg
+/gate/source/elec/gps/maxphi 270 deg
+
+/control/execute visu.mac
+
+#/gate/output/root/enable
+#/gate/output/root/setFileName output/upcloseROOT
+#/gate/output/root/setRootHitFlag 1
+
+/gate/application/setTotalNumberOfPrimaries 100
+/gate/application/start
