@@ -27,7 +27,7 @@
 /gate/OpticalSystem/placement/setTranslation 4. 0. 0. mm
 /gate/OpticalSystem/placement/setRotationAngle 90 deg
 /gate/OpticalSystem/placement/setRotationAxis 0 1 0
-/gate/OpticalSystem/setMaterial BGO
+/gate/OpticalSystem/setMaterial Anthracene
 
 ## Define pixelated detector:
 #/gate/OpticalSystem/daughters/name crystal
@@ -63,7 +63,7 @@
 #/gate/etape/vis/setColor white
 
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save output/bgoandanthraceneedepoutput/BGOedep.txt
+/gate/actor/edepReadout/save output/bgoandanthraceneedepoutput/ANTHRACENEedep.txt
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo OpticalSystem
 /gate/actor/edepReadout/setSize 200 200 200 mm
