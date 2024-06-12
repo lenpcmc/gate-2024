@@ -24,10 +24,10 @@
 /gate/OpticalSystem/geometry/setHeight 4 mm
 /gate/OpticalSystem/geometry/setPhiStart 0 rad
 /gate/OpticalSystem/geometry/setDeltaPhi 6.28 rad
-/gate/OpticalSystem/placement/setTranslation 4. 0. 0. mm
+/gate/OpticalSystem/placement/setTranslation 3 0. 0. mm
 /gate/OpticalSystem/placement/setRotationAngle 90 deg
 /gate/OpticalSystem/placement/setRotationAxis 0 1 0
-/gate/OpticalSystem/setMaterial Anthracene
+/gate/OpticalSystem/setMaterial BGO
 
 ## Define pixelated detector:
 #/gate/OpticalSystem/daughters/name crystal
@@ -63,7 +63,7 @@
 #/gate/etape/vis/setColor white
 
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save output/bgoandanthraceneedepoutput/ANTHRACENEedep.txt
+/gate/actor/edepReadout/save output/bgoanthoutput/closerBGOedep.txt
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo OpticalSystem
 /gate/actor/edepReadout/setSize 200 200 200 mm
@@ -82,7 +82,7 @@
 /gate/source/addSource elec
 /gate/source/elec/gps/particle e-
 /gate/source/elec/gps/energytype Mono
-/gate/source/elec/gps/monoenergy 1 MeV
+/gate/source/elec/gps/monoenergy 1.413 MeV
 /gate/source/elec/gps/angtype iso
 /gate/source/elec/gps/mintheta 0 deg
 /gate/source/elec/gps/maxtheta 180 deg
