@@ -24,9 +24,7 @@
 /gate/OpticalSystem/geometry/setHeight 4 mm
 /gate/OpticalSystem/geometry/setPhiStart 0 rad
 /gate/OpticalSystem/geometry/setDeltaPhi 6.28 rad
-/gate/OpticalSystem/placement/setTranslation 3 0. 0. mm
-/gate/OpticalSystem/placement/setRotationAngle 90 deg
-/gate/OpticalSystem/placement/setRotationAxis 0 1 0
+/gate/OpticalSystem/placement/setTranslation 0 0. -3. mm
 /gate/OpticalSystem/setMaterial Anthracene
 
 ## Define pixelated detector:
@@ -72,22 +70,19 @@
 /gate/actor/edepReadout/enableEdep true
 
 #Physics
-/gate/physics/addPhysicsList emstandard #Use higher _opt(number) suffix for more precision
+/gate/physics/addPhysicsList emstandard 
+#Use higher _opt(number) suffix for more precision
 
 #Initialization
 /gate/geometry/rebuild
 /gate/run/initialize
 
 #Actors
-/gate/source/addSource elec
-/gate/source/elec/gps/particle e-
-/gate/source/elec/gps/energytype Mono
-/gate/source/elec/gps/monoenergy 0.546 MeV
-/gate/source/elec/gps/angtype iso
-/gate/source/elec/gps/mintheta 0 deg
-/gate/source/elec/gps/maxtheta 180 deg
-/gate/source/elec/gps/minphi 90 deg
-/gate/source/elec/gps/maxphi 270 deg
+/gate/source/addSource histogram gps
+/gate/source/histogram/gps/particle e-
+/gate/source/histogram/gps/energytype UserSpectrum
+/gate/source/histogram/gps/setSpectrumFile Histogram.txt
+/gate/source/histogram/setIntensity 10
 
 /control/execute visu.mac
 
@@ -95,5 +90,9 @@
 #/gate/output/root/setFileName output/upcloseROOT
 #/gate/output/root/setRootHitFlag 1
 
-/gate/application/setTotalNumberOfPrimaries 1110000
+/gate/application/setTimeSlice     300.  s
+/gate/application/setTimeStart     0.  s
+/gate/application/setTimeStop      300.  s
+
+/gate/application/setTotalNumberOfPrimaries 555000
 /gate/application/start

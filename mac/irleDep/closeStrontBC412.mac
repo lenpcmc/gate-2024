@@ -25,7 +25,7 @@
 /gate/OpticalSystem/geometry/setPhiStart 0 rad
 /gate/OpticalSystem/geometry/setDeltaPhi 6.28 rad
 /gate/OpticalSystem/placement/setTranslation 0 0. -3. mm
-/gate/OpticalSystem/setMaterial BGO
+/gate/OpticalSystem/setMaterial BC412
 
 ## Define pixelated detector:
 #/gate/OpticalSystem/daughters/name crystal
@@ -61,7 +61,7 @@
 #/gate/etape/vis/setColor white
 
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save output/irleDepoutput/closerBGOedep.txt
+/gate/actor/edepReadout/save output/irleDepoutput/closerStrontBC412output.txt
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo OpticalSystem
 /gate/actor/edepReadout/setSize 200 200 200 mm
@@ -77,15 +77,15 @@
 /gate/run/initialize
 
 #Actors
-/gate/source/addSource elec
-/gate/source/elec/gps/particle e-
-/gate/source/elec/gps/energytype Mono
-/gate/source/elec/gps/monoenergy 1.413 MeV
-/gate/source/elec/gps/angtype iso
-/gate/source/elec/gps/mintheta 0 deg
-/gate/source/elec/gps/maxtheta 180 deg
-/gate/source/elec/gps/minphi 90 deg
-/gate/source/elec/gps/maxphi 270 deg
+/gate/source/addSource str90hist gps
+/gate/source/str90hist/gps/particle e-
+/gate/source/str90hist/gps/energytype UserSpectrum
+/gate/source/str90hist/gps/setSpectrumFile stront90spectrum.txt
+/gate/source/str90hist/gps/angtype iso
+/gate/source/str90hist/gps/mintheta 0. deg
+/gate/source/str90hist/gps/maxtheta 180. deg
+/gate/source/str90hist/gps/minphi 0. deg
+/gate/source/str90hist/gps/maxphi 360. deg
 
 /control/execute visu.mac
 
@@ -93,5 +93,5 @@
 #/gate/output/root/setFileName output/upcloseROOT
 #/gate/output/root/setRootHitFlag 1
 
-/gate/application/setTotalNumberOfPrimaries 555000
+/gate/application/setTotalNumberOfPrimaries 100000
 /gate/application/start

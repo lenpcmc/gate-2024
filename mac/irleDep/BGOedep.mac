@@ -24,9 +24,7 @@
 /gate/OpticalSystem/geometry/setHeight 4 mm
 /gate/OpticalSystem/geometry/setPhiStart 0 rad
 /gate/OpticalSystem/geometry/setDeltaPhi 6.28 rad
-/gate/OpticalSystem/placement/setTranslation 4. 0. 0. mm
-/gate/OpticalSystem/placement/setRotationAngle 90 deg
-/gate/OpticalSystem/placement/setRotationAxis 0 1 0
+/gate/OpticalSystem/placement/setTranslation 0 0. -3. mm
 /gate/OpticalSystem/setMaterial BGO
 
 ## Define pixelated detector:
