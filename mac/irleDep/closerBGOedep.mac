@@ -82,7 +82,7 @@
 /gate/source/addSource elec
 /gate/source/elec/gps/particle e-
 /gate/source/elec/gps/energytype Mono
-/gate/source/elec/gps/monoenergy 1.413 MeV
+/gate/source/elec/gps/monoenergy 0.546 MeV
 /gate/source/elec/gps/angtype iso
 /gate/source/elec/gps/mintheta 0 deg
 /gate/source/elec/gps/maxtheta 180 deg
