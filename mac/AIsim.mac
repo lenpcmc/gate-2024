@@ -15,13 +15,13 @@
 /gate/scin/placement/setTranslation 60. 0. 0. cm
 /gate/scin/setMaterial ptpppo
 
-/gate/world/daughters/name OpticalSystem
+/gate/world/daughters/name OpticalSystem1
 /gate/world/daughters/insert box
-/gate/OpticalSystem/geometry/setXLength 3 mm 
-/gate/OpticalSystem/geometry/setYLength 100 mm 
-/gate/OpticalSystem/geometry/setZLength 1 mm 
-/gate/OpticalSystem/placement/setTranslation 60. 0. 5. cm
-/gate/OpticalSystem/setMaterial ptpppo
+/gate/OpticalSystem1/geometry/setXLength 100 mm 
+/gate/OpticalSystem1/geometry/setYLength 3 mm 
+/gate/OpticalSystem1/geometry/setZLength 1 mm 
+/gate/OpticalSystem1/placement/setTranslation 60. 0. 0. cm
+/gate/OpticalSystem1/setMaterial ptpppo
 
 /gate/world/daughters/name patient
 /gate/world/daughters/insert box
@@ -31,27 +31,47 @@
 /gate/patient/placement/setTranslation 100. 0. 0. cm
 /gate/patient/setMaterial Water
 
-#Define pixelated detector
-/gate/OpticalSystem/daughters/name crystal
-/gate/OpticalSystem/daughters/insert box
-/gate/crystal/geometry/setXLength 3 mm
-/gate/crystal/geometry/setYLength 100 mm
-/gate/crystal/geometry/setZLength 1 mm
+############## Define SCINTILLATOR pixelated detector:
+/gate/scin/daughters/name crystal
+/gate/scin/daughters/insert box
+/gate/crystal/geometry/setXLength 1 cm
+/gate/crystal/geometry/setYLength 10 cm
+/gate/crystal/geometry/setZLength 10 cm
 /gate/crystal/setMaterial ptpppo
-/gate/systems/OpticalSystem/crystal/attach crystal
+/gate/systems/scin/crystal/attach crystal
 
 /gate/crystal/daughters/name pixel
 /gate/crystal/daughters/insert box
-/gate/pixel/geometry/setXLength 1.5 mm
-/gate/pixel/geometry/setYLength 100 mm
-/gate/pixel/geometry/setZLength 1 mm
+/gate/pixel/geometry/setXLength .1 cm
+/gate/pixel/geometry/setYLength 10 cm
+/gate/pixel/geometry/setZLength 10 cm
 /gate/pixel/setMaterial ptpppo
 /gate/pixel/repeaters/insert linear
-/gate/pixel/linear/setRepeatNumber 1
-/gate/pixel/linear/setRepeatVector 1.5 0 0 mm
+/gate/pixel/linear/setRepeatNumber 10
+/gate/pixel/linear/setRepeatVector .1 0 0 cm
 /gate/pixel/attachCrystalSD
-/gate/systems/OpticalSystem/pixel/attach pixel
-/gate/pixel/vis/setColor blue
+/gate/systems/scin/pixel/attach pixel
+
+############ Define PHOTODETECTOR pixelated detector
+/gate/OpticalSystem1/daughters/name crystal
+/gate/OpticalSystem1/daughters/insert box
+/gate/crystal/geometry/setXLength 1 cm
+/gate/crystal/geometry/setYLength 10 cm
+/gate/crystal/geometry/setZLength 10 cm
+/gate/crystal/setMaterial ptpppo
+/gate/systems/OpticalSystem1/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert box
+/gate/pixel/geometry/setXLength .1 cm
+/gate/pixel/geometry/setYLength 10 cm
+/gate/pixel/geometry/setZLength 10 cm
+/gate/pixel/setMaterial ptpppo
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 10
+/gate/pixel/linear/setRepeatVector .1 0 0 cm
+/gate/pixel/attachCrystalSD
+/gate/systems/OpticalSystem1/pixel/attach pixel
 
 #eDep output
 /gate/actor/addActor DoseActor eDepsense
@@ -87,13 +107,13 @@
 
 /control/execute visu.mac
 
-/gate/application/setTimeSlice .01 s
+/gate/application/setTimeSlice 1 s
 /gate/application/setTimeStart 0 s
 /gate/application/setTimeStop 1 s
 
-#/gate/output/root/enable
-#/gate/output/root/setFileName output/AIsimROOT
-#/gate/output/root/setRootHitFlag 1
+/gate/output/root/enable
+/gate/output/root/setFileName output/AIsimROOT
+/gate/output/root/setRootHitFlag 1
 
 /gate/application/setTotalNumberOfPrimaries 1000
 /gate/application/start

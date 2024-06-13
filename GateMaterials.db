@@ -520,9 +520,18 @@ Anthracene:     d=1.25 g/cm3;   n=2;    state=solid
         +el: name=Hydrogen;     n= 14
         +el: name=Carbon;       n= 10
 
-Boric_acid: d=1.44 g/cm3; n=3; state=solid
-        +el: name=Hydrogen; n=3
-        +el: name=Boron; n=1
-        +el: name=Oxygen; n=3
+H3BO3: d=1.44 g/cm3; n=3; state=solid
+        +el: name=Hydrogen;     n=3
+        +el: name=Boron;        n=1
+        +el: name=Oxygen;       n=3
 
-Kenji:
+Kenji: d=5.6 g/cm3; n=4; state=solid
+        +mat:name=Gd2O3;        f=0.21
+        +mat:name=WO3;          f=0.35
+        +mat:name=H3BO3;        f=0.40
+        +mat:name=Eu2O3;        f=0.04
+
+BC412: d=1.032 g/cm3; n=2; state=solid
+        +el: name=Hydrogen;     f=0.5246
+        +el: name=Carbon;       f=0.4754
+

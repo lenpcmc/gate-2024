@@ -63,7 +63,7 @@
 #/gate/etape/vis/setColor white
 
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save output/bgoanthoutput/closerBGOedep.txt
+/gate/actor/edepReadout/save output/irleDepoutput/closerBGOedep.txt
 /gate/actor/edepReadout/stepHitType random
 /gate/actor/edepReadout/attachTo OpticalSystem
 /gate/actor/edepReadout/setSize 200 200 200 mm
@@ -95,5 +95,5 @@
 #/gate/output/root/setFileName output/upcloseROOT
 #/gate/output/root/setRootHitFlag 1
 
-/gate/application/setTotalNumberOfPrimaries 10000
+/gate/application/setTotalNumberOfPrimaries 1110000
 /gate/application/start
