@@ -74,7 +74,7 @@
 /gate/systems/OpticalSystem1/pixel/attach pixel
 
 #eDep output
-/gate/actor/addActor DoseActor eDepsense
+/gate/actor/addActor DoseActor AIsim-{energy}.txt
 /gate/actor/eDepsense/attachTo patient
 /gate/actor/eDepsense/setSize 2000 2000 2000 mm
 /gate/actor/eDepsense/enableEdep             true

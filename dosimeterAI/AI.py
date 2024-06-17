@@ -3,7 +3,7 @@ import tensorflow as tf
 from tensorflow import keras
 import pandas as pd
 import numpy as np
-import matplotlib
+import matplotlib as mp
 from matplotlib import pyplot as plt
 
 df = pd.read_csv('/home/uakgun/src/gate-2024/AIdataprocessing/AIdata.csv', header = None)
@@ -46,7 +46,7 @@ model.summary()
 
 #the validation split in the line below seems to make the mae more stable the lower it is... to a point. Not sure how it affects
 #the actual prediction values yet. Keeping the validation split to ~0.1 to ~0.2 seems to be a good medium though.
-history = model.fit(xtr, ytrain, validation_split = 0.1, epochs = 50000)
+history = model.fit(xtr, ytrain, validation_split = 0.1, epochs = 5000)
 
 loss = history.history['loss']
 val_loss = history.history['val_loss']
@@ -59,7 +59,6 @@ plt.ylabel('Loss')
 plt.legend()
 plt.show()
 
-
-predictions = model.predict(xte[:5])
+predictions = model.predict(xte[:10])
 print("Predicted values are: ", predictions)
-print("Real values are: ", ytest[:5])
+print("Real values are: ", ytest[:10])

@@ -1,19 +1,24 @@
 import os
 
-onlyfiles = next(os.walk('/home/vgate/src/gate-2024/output/eDep'))[2] #directory is your directory path as string
-ed = open('/home/uakgun/src/gate-2024/AIdataprocessing/eDep.txt', 'r')
-pe = open('/home/uakgun/src/gate-2024/AIdataprocessing/penergy.txt', 'r')
-pc = open('/home/uakgun/src/gate-2024/AIdataprocessing/PhotonCount.txt', 'r')
-bt = open('/home/uakgun/src/gate-2024/AIdataprocessing/BeamTime.txt', 'r')
+open('/home/uakgun/src/gate-2024/AIdataprocessing/AIdata.csv', 'w').close()
 
-edcontent = ed.readlines()
-pecontent = pe.readlines()
-pccontent = pc.readlines()
-btcontent = bt.readlines()
+ed = open('/home/uakgun/src/gate-2024/AIdataprocessing/rawtoindexdata/eDep.txt', 'r')
+pe = open('/home/uakgun/src/gate-2024/AIdataprocessing/rawtoindexdata/penergy.txt', 'r')
+pc = open('/home/uakgun/src/gate-2024/AIdataprocessing/rawtoindexdata/PhotonCount.txt', 'r')
+bt = open('/home/uakgun/src/gate-2024/AIdataprocessing/rawtoindexdata/BeamTime.txt', 'r')
 
-q = open('/home/vgate/src/gate-2024/AIdataprocessing/AIdata.csv', 'a')
+edcont = ed.readlines()
+pecont = pe.readlines()
+pccont = pc.readlines()
+btcont = bt.readlines()
 
-for i in range(int(onlyfiles)):
-	q.write(pecontent[i] + ',' + pccontent[i] + ',' + btcontent[i] + edcontent[i] + '\n')
+q = open('/home/uakgun/src/gate-2024/AIdataprocessing/AIdata.csv', 'a')
+
+for i in range(len(edcont)):
+	pecontent = pecont[i]
+	pccontent = pccont[i]
+	btcontent = btcont[i]
+	edcontent = edcont[i]
+	q.write(pecontent.replace('\n', '') + ',' + pccontent.replace('\n','') + ',' + btcontent.replace('\n', '') + ',' + edcontent.replace('\n', '') + '\n')
 	
 print('done')
