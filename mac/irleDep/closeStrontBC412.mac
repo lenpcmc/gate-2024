@@ -27,26 +27,26 @@
 /gate/OpticalSystem/placement/setTranslation 0 0. -3. mm
 /gate/OpticalSystem/setMaterial BC412
 
-## Define pixelated detector:
-#/gate/OpticalSystem/daughters/name crystal
-#/gate/OpticalSystem/daughters/insert cylinder
-#/gate/crystal/geometry/setRmin 0 cm
-#/gate/crystal/geometry/setRmax 3.175 cm
-#/gate/crystal/geometry/setHeight .635 cm
-#/gate/crystal/setMaterial Ptp
-#/gate/systems/OpticalSystem/crystal/attach crystal
-#
-#/gate/crystal/daughters/name pixel
-#/gate/crystal/daughters/insert cylinder
-#/gate/pixel/geometry/setRmin 0 cm
-#/gate/pixel/geometry/setRmax 3.175 cm
-#/gate/pixel/geometry/setHeight .0635 cm
-#/gate/pixel/setMaterial Ptp
-#/gate/pixel/repeaters/insert linear
-#/gate/pixel/linear/setRepeatNumber 10
-#/gate/pixel/linear/setRepeatVector .0635 0 0 cm
-#/gate/pixel/attachCrystalSD
-#/gate/systems/OpticalSystem/pixel/attach pixel
+# Define pixelated detector:
+/gate/OpticalSystem/daughters/name crystal
+/gate/OpticalSystem/daughters/insert cylinder
+/gate/crystal/geometry/setRmin 0 cm
+/gate/crystal/geometry/setRmax 3.175 cm
+/gate/crystal/geometry/setHeight .635 cm
+/gate/crystal/setMaterial Ptp
+/gate/systems/OpticalSystem/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert cylinder
+/gate/pixel/geometry/setRmin 0 cm
+/gate/pixel/geometry/setRmax 3.175 cm
+/gate/pixel/geometry/setHeight .00635 cm
+/gate/pixel/setMaterial Ptp
+/gate/pixel/repeaters/insert linear
+/gate/pixel/linear/setRepeatNumber 100
+/gate/pixel/linear/setRepeatVector .00635 0 0 cm
+/gate/pixel/attachCrystalSD
+/gate/systems/OpticalSystem/pixel/attach pixel
 ############################################################################################################################################
 
 #/gate/world/daughters/name alufoil
@@ -80,7 +80,7 @@
 /gate/source/addSource str90hist gps
 /gate/source/str90hist/gps/particle e-
 /gate/source/str90hist/gps/energytype UserSpectrum
-/gate/source/str90hist/gps/setSpectrumFile stront90spectrum.txt
+/gate/source/str90hist/gps/setSpectrumFile /home/uakgun/src/gate-2024/stront90spectrum.txt
 /gate/source/str90hist/gps/angtype iso
 /gate/source/str90hist/gps/mintheta 0. deg
 /gate/source/str90hist/gps/maxtheta 180. deg
@@ -89,9 +89,17 @@
 
 /control/execute visu.mac
 
-#/gate/output/root/enable
-#/gate/output/root/setFileName output/upcloseROOT
-#/gate/output/root/setRootHitFlag 1
+/gate/output/root/enable
+/gate/output/root/setRootHitFlag            1
+/gate/output/root/setRootSinglesFlag        1
+/gate/output/root/setRootNtupleFlag         0
+/gate/output/root/setFileName output/closerStrBC412ROOT
+
+#/gate/output/ascii(**binary**)/enable
+#/gate/output/ascii/setFileName  output/irleDepoutput/strontest.txt
+#
+## enable ascii(**binary**) output for hits
+#/gate/output/ascii(**binary**)/setOutFileHitsFlag   1
 
 /gate/application/setTotalNumberOfPrimaries 100000
 /gate/application/start

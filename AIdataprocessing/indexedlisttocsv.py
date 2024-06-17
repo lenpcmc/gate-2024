@@ -14,6 +14,6 @@ btcontent = bt.readlines()
 q = open('/home/vgate/src/gate-2024/AIdataprocessing/AIdata.csv', 'a')
 
 for i in range(int(onlyfiles)):
-	q.write(edcontent[i] + ',' + pecontent[i] + ',' + pccontent[i] + ',' + btcontent[i] + '\n')
+	q.write(pecontent[i] + ',' + pccontent[i] + ',' + btcontent[i] + edcontent[i] + '\n')
 	
 print('done')
