@@ -1,5 +1,7 @@
 import os
 
+open('/home/uakgun/src/gate-2024/AIdataprocessing/AIdata.csv', 'w').close()
+
 q = open('/home/uakgun/src/gate-2024/AIdataprocessing/AIdata.csv', 'a')
 
 def funct(pe, pc, bt):

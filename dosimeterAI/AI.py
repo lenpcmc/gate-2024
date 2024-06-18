@@ -46,7 +46,7 @@ model.summary()
 
 #the validation split in the line below seems to make the mae more stable the lower it is... to a point. Not sure how it affects
 #the actual prediction values yet. Keeping the validation split to ~0.1 to ~0.2 seems to be a good medium though.
-history = model.fit(xtr, ytrain, validation_split = 0.1, epochs = 5000)
+history = model.fit(xtr, ytrain, validation_split = 0.1, epochs = 500)
 
 loss = history.history['loss']
 val_loss = history.history['val_loss']

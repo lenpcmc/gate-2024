@@ -101,5 +101,5 @@
 ## enable ascii(**binary**) output for hits
 #/gate/output/ascii(**binary**)/setOutFileHitsFlag   1
 
-/gate/application/setTotalNumberOfPrimaries 100000
+/gate/application/setTotalNumberOfPrimaries 100
 /gate/application/start
