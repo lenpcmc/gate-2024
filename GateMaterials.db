@@ -50,6 +50,10 @@ Gold:       S= Au  ; Z= 79  ; A= 197.0   g/mole
 Strontium:  S= Sr  ; Z= 38  ; A=  89.9  g/mole
 
 [Materials]
+SiO2: d=2.2 g/cm3 ; n=2
+        +el: name=Silicon ; n=1
+        +el: name=Oxygen ; n=2
+
 Vacuum: d=0.000001 mg/cm3 ; n=1 
 	+el: name=Hydrogen ; n=1
 
