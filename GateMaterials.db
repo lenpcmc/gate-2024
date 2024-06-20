@@ -62,6 +62,7 @@ Strontium-90: d=2.64 g/cm3 ; n=1 ; state=solid
 
 Gold:    d=19.3 g/cm3     ; n=1
     +el: name=auto        ; n=1
+
 Aluminium: d=2.7 g/cm3 ; n=1 ; state=solid
 	+el: name=auto ; n=1
 
