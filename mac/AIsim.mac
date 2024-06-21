@@ -1,0 +1,128 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength 5 m
+/gate/world/geometry/setYLength 2 m
+/gate/world/geometry/setZLength 2 m
+/gate/world/setMaterial Air
+
+/gate/world/daughters/name scin
+/gate/world/daughters/insert box
+/gate/scin/geometry/setXLength 1 cm 
+/gate/scin/geometry/setYLength 10 cm 
+/gate/scin/geometry/setZLength 10 cm 
+/gate/scin/placement/setTranslation 60. 0. 0. cm
+/gate/scin/setMaterial ptpppo
+
+/gate/world/daughters/name OpticalSystem1
+/gate/world/daughters/insert box
+/gate/OpticalSystem1/geometry/setXLength 10 mm 
+/gate/OpticalSystem1/geometry/setYLength 100 mm 
+/gate/OpticalSystem1/geometry/setZLength 1 mm 
+/gate/OpticalSystem1/placement/setTranslation 60. 0. 5. cm
+/gate/OpticalSystem1/setMaterial ptpppo
+
+/gate/world/daughters/name phantom
+/gate/world/daughters/insert box
+/gate/phantom/geometry/setXLength 50 cm 
+/gate/phantom/geometry/setYLength 50 cm 
+/gate/phantom/geometry/setZLength 50 cm 
+/gate/phantom/placement/setTranslation 100. 0. 0. cm
+/gate/phantom/setMaterial Water
+
+############## Define SCINTILLATOR pixelated detector:
+#/gate/scin/daughters/name crystal
+#/gate/scin/daughters/insert box
+#/gate/crystal/geometry/setXLength 1 cm
+#/gate/crystal/geometry/setYLength 10 cm
+#/gate/crystal/geometry/setZLength 10 cm
+#/gate/crystal/setMaterial ptpppo
+#/gate/systems/scin/crystal/attach crystal
+#
+#/gate/crystal/daughters/name pixel
+#/gate/crystal/daughters/insert box
+#/gate/pixel/geometry/setXLength .1 cm
+#/gate/pixel/geometry/setYLength 10 cm
+#/gate/pixel/geometry/setZLength 10 cm
+#/gate/pixel/setMaterial ptpppo
+#/gate/pixel/repeaters/insert linear
+#/gate/pixel/linear/setRepeatNumber 10
+#/gate/pixel/linear/setRepeatVector .1 0 0 cm
+#/gate/pixel/attachCrystalSD
+#/gate/systems/scin/pixel/attach pixel
+#
+############# Define PHOTODETECTOR pixelated detector
+#/gate/OpticalSystem1/daughters/name crystal
+#/gate/OpticalSystem1/daughters/insert box
+#/gate/crystal/geometry/setXLength 1 cm
+#/gate/crystal/geometry/setYLength 10 cm
+#/gate/crystal/geometry/setZLength 10 cm
+#/gate/crystal/setMaterial ptpppo
+#/gate/systems/OpticalSystem1/crystal/attach crystal
+#
+#/gate/crystal/daughters/name pixel
+#/gate/crystal/daughters/insert box
+#/gate/pixel/geometry/setXLength .1 cm
+#/gate/pixel/geometry/setYLength 10 cm
+#/gate/pixel/geometry/setZLength 10 cm
+#/gate/pixel/setMaterial ptpppo
+#/gate/pixel/repeaters/insert linear
+#/gate/pixel/linear/setRepeatNumber 10
+#/gate/pixel/linear/setRepeatVector .1 0 0 cm
+#/gate/pixel/attachCrystalSD
+#/gate/systems/OpticalSystem1/pixel/attach pixel
+
+#eDep output
+/gate/actor/addActor DoseActor phantomeDep
+/gate/actor/phantomeDep/attachTo phantom
+/gate/actor/phantomeDep/setSize 2000 2000 2000 mm
+/gate/actor/phantomeDep/enableEdep             true
+/gate/actor/phantomeDep/enableUncertaintyEdep  false
+/gate/actor/phantomeDep/enableSquaredEdep      false
+/gate/actor/phantomeDep/enableDose             false
+/gate/actor/phantomeDep/enableUncertaintyDose  false
+/gate/actor/phantomeDep/enableSquaredDose      false
+/gate/actor/phantomeDep/enableNumberOfHits     false
+/gate/actor/phantomeDep/save output/eDep/AIsim.txt
+
+#Physics
+/gate/physics/addPhysicsList G4EmStandardPhysics #Use higher _opt(number) suffix for more precision
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Actors
+/gate/source/addSource beam
+/gate/source/beam/gps/particle e-
+/gate/source/beam/gps/energytype Mono
+/gate/source/beam/gps/monoenergy 20 MeV
+/gate/source/beam/gps/direction 1 0 0
+/gate/source/beam/gps/type Volume
+/gate/source/beam/gps/shape Sphere
+/gate/source/beam/gps/radius 6 mm #get exact dimensions of pulse
+/gate/source/beam/gps/centre 0 0 0 cm
+/gate/source/beam/visualize 10000 green 2
+
+/control/execute visu.mac
+
+/gate/application/setTimeSlice .005 s
+/gate/application/setTimeStart 0 s
+/gate/application/setTimeStop .500 s
+
+#/gate/output/root/enable
+#/gate/output/root/setFileName output/AIsimROOT
+#/gate/output/root/setRootSinglesFlag 1
+
+/gate/actor/addActor               SimulationStatisticActor stat
+/gate/actor/stat/save              output/statistics.txt
+/gate/actor/stat/saveEveryNSeconds 60
+
+/gate/output/ascii/enable
+/gate/output/ascii/setFileName output/AIsimtest.txt
+/gate/output/ascii/setOutFileHitsFlag 1
+/gate/output/ascii/setOutFileSinglesFlag 0
+
+/gate/application/setNumberOfPrimariesPerRun 100
+/gate/application/start

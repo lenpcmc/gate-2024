@@ -4,18 +4,38 @@
     <propertiestable>
       <property name="SCINTILLATIONYIELD" value="26000" unit="1/MeV"/>
       <property name="RESOLUTIONSCALE" value="4.41"/>
-      <property name="FASTTIMECONSTANT" value="40" unit="ns"/>
-      <property name="YIELDRATIO" value="1"/>
-      <propertyvector name="FASTCOMPONENT" energyunit="eV">
-        <ve energy="2.95167" value="1"/>
+      <property name="SCINTILLATIONTIMECONSTANT1" value="40" unit="ns"/>
+      <property name="SCINTILLATIONYIELD1" value="1"/>
+      <propertyvector name="SCINTILLATIONCOMPONENT1" energyunit="eV">
+	<ve energy="2.95167" value="1"/>
       </propertyvector>
       <propertyvector name="ABSLENGTH" unit="m" energyunit="eV">
-        <ve energy="1.84" value="50"/>
-        <ve energy="4.08" value="50"/>
+	<ve energy="1.84" value="50"/>
+	<ve energy="4.08" value="50"/>
       </propertyvector>
       <propertyvector name="RINDEX" energyunit="eV">
-        <ve energy="1.84" value="1.82"/>
-        <ve energy="4.08" value="1.82"/>
+	<ve energy="1.84" value="1.82"/>
+	<ve energy="4.08" value="1.82"/>
+      </propertyvector>
+    </propertiestable>
+  </material>
+
+<material name="BC412">
+    <propertiestable>
+      <property name="SCINTILLATIONYIELD" value="17400" unit="1/MeV"/>
+      <property name="RESOLUTIONSCALE" value="4.41"/>
+      <property name="SCINTILLATIONTIMECONSTANT1" value="3.3" unit="ns"/>
+      <property name="SCINTILLATIONYIELD1" value="1"/>
+      <propertyvector name="SCINTILLATIONCOMPONENT1" energyunit="eV">
+        <ve energy="2.95167" value="1"/>
+      </propertyvector>
+      <propertyvector name="ABSLENGTH" unit="cm" energyunit="MeV">
+        <ve energy="1.84" value="210"/>
+        <ve energy="4.08" value="210"/>
+      </propertyvector>
+      <propertyvector name="RINDEX" energyunit="eV">
+        <ve energy="1.84" value="1.58"/>
+        <ve energy="4.08" value="1.58"/>
       </propertyvector>
     </propertiestable>
   </material>

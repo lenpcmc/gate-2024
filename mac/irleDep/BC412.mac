@@ -1,0 +1,175 @@
+#Headers
+/gate/geometry/setMaterialDatabase GateMaterials.db 
+
+#Geometries
+/gate/world/geometry/setXLength 1 m
+/gate/world/geometry/setYLength 1 m
+/gate/world/geometry/setZLength 1 m
+/gate/world/setMaterial Air
+
+###################################################################################################################################
+#OpticalSystem (detector)
+
+# Define the dimensions, position and material
+/gate/world/daughters/name OpticalSystem
+/gate/world/daughters/insert box
+/gate/OpticalSystem/geometry/setXLength 50 cm
+/gate/OpticalSystem/geometry/setYLength 50 cm
+/gate/OpticalSystem/geometry/setZLength 50 cm
+/gate/OpticalSystem/placement/setTranslation 0 0 0 mm
+/gate/OpticalSystem/setMaterial Air
+/gate/OpticalSystem/vis/setColor red
+
+### Define pixelated detector:
+/gate/OpticalSystem/daughters/name crystal
+/gate/OpticalSystem/daughters/insert cylinder
+/gate/crystal/geometry/setRmin 0 cm
+/gate/crystal/geometry/setRmax 3.175 cm
+/gate/crystal/geometry/setHeight 4 mm
+/gate/crystal/geometry/setPhiStart 0 rad
+/gate/crystal/geometry/setDeltaPhi 6.28 rad
+/gate/crystal/placement/setTranslation 0 0. -3.5 mm
+/gate/crystal/setMaterial BC412
+/gate/crystal/vis/setColor red
+/gate/systems/OpticalSystem/crystal/attach crystal
+
+/gate/crystal/daughters/name pixel
+/gate/crystal/daughters/insert cylinder
+/gate/pixel/geometry/setRmin 0 mm
+/gate/pixel/geometry/setRmax .25 mm
+/gate/pixel/geometry/setHeight .1 mm
+/gate/pixel/placement/setTranslation 0 0 -2.05 mm
+/gate/pixel/setMaterial SiO2
+/gate/pixel/vis/setColor blue
+#/gate/pixel/repeaters/insert linear
+#/gate/pixel/linear/setRepeatNumber 10
+#/gate/pixel/linear/setRepeatVector 0 0 -.1 mm
+/gate/pixel/attachCrystalSD
+/gate/systems/OpticalSystem/pixel/attach pixel
+############################################################################################################################################
+
+/gate/world/daughters/name plastic1
+/gate/world/daughters/insert cylinder
+/gate/plastic1/geometry/setRmin 0 mm
+/gate/plastic1/geometry/setRmax 1.27 cm
+/gate/plastic1/geometry/setHeight 1 mm
+/gate/plastic1/placement/setTranslation 0 0 -.5 mm
+/gate/plastic1/placement/setRotationAngle 90 deg
+/gate/plastic1/placement/setRotationAxis 0 0 1
+/gate/plastic1/setMaterial Plastic
+/gate/plastic1/vis/setColor green
+
+/gate/world/daughters/name plastic2
+/gate/world/daughters/insert cylinder
+/gate/plastic2/geometry/setRmin 1.17 cm
+/gate/plastic2/geometry/setRmax 1.27 cm
+/gate/plastic2/geometry/setHeight 3 mm
+/gate/plastic2/placement/setTranslation 0 0 0 mm
+/gate/plastic2/placement/setRotationAngle 90 deg
+/gate/plastic2/placement/setRotationAxis 0 0 1
+/gate/plastic2/setMaterial Plastic
+/gate/plastic2/vis/setColor green
+
+/gate/world/daughters/name plastic3
+/gate/world/daughters/insert cylinder
+/gate/plastic3/geometry/setRmin 0 mm
+/gate/plastic3/geometry/setRmax 1.27 cm
+/gate/plastic3/geometry/setHeight 1 mm
+/gate/plastic3/placement/setTranslation 0 0 .5 mm
+/gate/plastic3/placement/setRotationAngle 90 deg
+/gate/plastic3/placement/setRotationAxis 0 0 1
+/gate/plastic3/setMaterial Plastic
+/gate/plastic3/vis/setColor green
+
+/gate/world/daughters/name tef1
+/gate/world/daughters/insert cylinder
+/gate/tef1/geometry/setRmin 0 mm
+/gate/tef1/geometry/setRmax 3.175 cm
+/gate/tef1/geometry/setHeight .1 cm
+/gate/tef1/placement/setTranslation 0 0 -6.1 mm
+/gate/tef1/placement/setRotationAngle 90 deg
+/gate/tef1/placement/setRotationAxis 0 0 1
+/gate/tef1/setMaterial Aluminium
+/gate/tef1/vis/setColor white
+
+/gate/world/daughters/name tef2
+/gate/world/daughters/insert cylinder
+/gate/tef2/geometry/setRmin 3.175 cm
+/gate/tef2/geometry/setRmax 3.275 cm
+/gate/tef2/geometry/setHeight 8.4 mm
+/gate/tef2/placement/setTranslation 0 0 -2.5 mm
+/gate/tef2/placement/setRotationAngle 90 deg
+/gate/tef2/placement/setRotationAxis 0 0 1
+/gate/tef2/setMaterial Aluminium
+/gate/tef2/vis/setColor white
+
+/gate/world/daughters/name tef3
+/gate/world/daughters/insert cylinder
+/gate/tef3/geometry/setRmin 0 cm
+/gate/tef3/geometry/setRmax 3.175 cm
+/gate/tef3/geometry/setHeight .1 cm
+/gate/tef3/placement/setTranslation 0 0 2 mm
+/gate/tef3/placement/setRotationAngle 90 deg
+/gate/tef3/placement/setRotationAxis 0 0 1
+/gate/tef3/setMaterial Aluminium
+/gate/tef3/vis/setColor white
+
+/gate/actor/addActor DoseActor edepReadout
+/gate/actor/edepReadout/save output/irleDepoutput/BC412eDep.txt
+/gate/actor/edepReadout/stepHitType random
+/gate/actor/edepReadout/attachTo crystal
+/gate/actor/edepReadout/setSize 200 200 200 mm
+/gate/actor/edepReadout/setResolution 1 1 1
+/gate/actor/edepReadout/enableDose false
+/gate/actor/edepReadout/enableEdep true
+
+#Physics
+/gate/physics/addPhysicsList emlivermore #Standard physics
+/gate/physics/addProcess OpticalAbsorption
+/gate/physics/addProcess OpticalRayleigh
+/gate/physics/addProcess OpticalBoundary
+/gate/physics/addProcess OpticalMie
+/gate/physics/addProcess OpticalWLS
+/gate/physics/addProcess Scintillation
+/gate/physics/addProcess Cerenkov
+
+#Initialization
+/gate/geometry/rebuild
+/gate/run/initialize
+
+#Surfaces
+/gate/pixel/surfaces/name                           	scin-to-opt
+/gate/pixel/surfaces/insert                         	crystal
+/gate/pixel/surfaces/scin-to-opt/setSurface  		    black 
+
+/gate/crystal/surfaces/name                     	    opt-to-scin
+/gate/crystal/surfaces/insert                   	    pixel
+/gate/crystal/surfaces/opt-to-scin/setSurface		    black
+
+#Actors
+/gate/source/addSource str90hist gps
+/gate/source/str90hist/gps/particle e-
+/gate/source/str90hist/gps/energytype UserSpectrum
+/gate/source/str90hist/gps/setSpectrumFile /home/uakgun/src/gate-2024/stront90spectrum.txt
+/gate/source/str90hist/gps/angtype iso
+/gate/source/str90hist/gps/mintheta 0. deg
+/gate/source/str90hist/gps/maxtheta 180. deg
+/gate/source/str90hist/gps/minphi 0. deg
+/gate/source/str90hist/gps/maxphi 360. deg
+
+/control/execute visu.mac
+
+#/gate/output/root/enable
+#/gate/output/root/setRootHitFlag            0
+#/gate/output/root/setRootSinglesFlag        0
+#/gate/output/root/setRootOpticalFlag        1
+#/gate/output/root/setFileName output/BC412ROOT
+
+/gate/output/tree/enable
+/gate/output/tree/addFileName output/BC412.txt
+/gate/output/tree/hits/enable
+/gate/output/tree/optical/enable
+/gate/output/tree/addCollection Singles
+
+/gate/application/setTotalNumberOfPrimaries 100
+/gate/application/start
