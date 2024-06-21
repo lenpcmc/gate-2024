@@ -29,7 +29,7 @@
       <propertyvector name="SCINTILLATIONCOMPONENT1" energyunit="eV">
         <ve energy="2.95167" value="1"/>
       </propertyvector>
-      <propertyvector name="ABSLENGTH" unit="m" energyunit="eV">
+      <propertyvector name="ABSLENGTH" unit="cm" energyunit="MeV">
         <ve energy="1.84" value="210"/>
         <ve energy="4.08" value="210"/>
       </propertyvector>
