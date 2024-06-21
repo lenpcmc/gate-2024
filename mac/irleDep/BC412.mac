@@ -114,14 +114,6 @@
 /gate/tef3/setMaterial Aluminium
 /gate/tef3/vis/setColor white
 
-/gate/pixel/surfaces/name                           	scin-to-opt
-/gate/pixel/surfaces/insert                         	crystal
-/gate/pixel/surfaces/scin-to-opt/setSurface  		        black 
-
-/gate/crystal/surfaces/name                     	    opt-to-scin
-/gate/crystal/surfaces/insert                   	    pixel
-/gate/crystal/surfaces/opt-to-scin/setSurface		        black 
-
 /gate/actor/addActor DoseActor edepReadout
 /gate/actor/edepReadout/save output/irleDepoutput/BC412eDep.txt
 /gate/actor/edepReadout/stepHitType random
@@ -145,6 +137,15 @@
 /gate/geometry/rebuild
 /gate/run/initialize
 
+#Surfaces
+/gate/pixel/surfaces/name                           	scin-to-opt
+/gate/pixel/surfaces/insert                         	crystal
+/gate/pixel/surfaces/scin-to-opt/setSurface  		    black 
+
+/gate/crystal/surfaces/name                     	    opt-to-scin
+/gate/crystal/surfaces/insert                   	    pixel
+/gate/crystal/surfaces/opt-to-scin/setSurface		    black
+
 #Actors
 /gate/source/addSource str90hist gps
 /gate/source/str90hist/gps/particle e-
@@ -165,9 +166,9 @@
 #/gate/output/root/setFileName output/BC412ROOT
 
 /gate/output/tree/enable
-/gate/output/tree/addFileName output/p.txt
+/gate/output/tree/addFileName output/BC412.txt
 /gate/output/tree/hits/enable
 /gate/output/tree/addCollection Singles
 
-/gate/application/setTotalNumberOfPrimaries 1
+/gate/application/setTotalNumberOfPrimaries 100
 /gate/application/start
