@@ -23,7 +23,7 @@
 <material name="BC412">
     <propertiestable>
       <property name="SCINTILLATIONYIELD" value="17400" unit="1/MeV"/>
-      <property name="RESOLUTIONSCALE" value="4.41"/>
+      <property name="RESOLUTIONSCALE" value="235.752361807"/>
       <property name="SCINTILLATIONTIMECONSTANT1" value="3.3" unit="ns"/>
       <property name="SCINTILLATIONYIELD1" value="1"/>
       <propertyvector name="SCINTILLATIONCOMPONENT1" energyunit="eV">

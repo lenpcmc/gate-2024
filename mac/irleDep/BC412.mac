@@ -2,9 +2,9 @@
 /gate/geometry/setMaterialDatabase GateMaterials.db 
 
 #Geometries
-/gate/world/geometry/setXLength 1 m
-/gate/world/geometry/setYLength 1 m
-/gate/world/geometry/setZLength 1 m
+/gate/world/geometry/setXLength 51 cm
+/gate/world/geometry/setYLength 51 cm
+/gate/world/geometry/setZLength 51 cm
 /gate/world/setMaterial Air
 
 ###################################################################################################################################
@@ -12,25 +12,25 @@
 
 # Define the dimensions, position and material
 /gate/world/daughters/name OpticalSystem
-/gate/world/daughters/insert box
-/gate/OpticalSystem/geometry/setXLength 50 cm
-/gate/OpticalSystem/geometry/setYLength 50 cm
-/gate/OpticalSystem/geometry/setZLength 50 cm
-/gate/OpticalSystem/placement/setTranslation 0 0 0 mm
-/gate/OpticalSystem/setMaterial Air
+/gate/world/daughters/insert cylinder
+/gate/OpticalSystem/geometry/setRmin 0 cm
+/gate/OpticalSystem/geometry/setRmax 3.175 cm
+/gate/OpticalSystem/geometry/setHeight 4 mm
+/gate/OpticalSystem/geometry/setPhiStart 0 rad
+/gate/OpticalSystem/geometry/setDeltaPhi 6.28 rad
+/gate/OpticalSystem/placement/setTranslation 0 0. -3.5 mm
+/gate/OpticalSystem/setMaterial BC412
 /gate/OpticalSystem/vis/setColor red
 
 ### Define pixelated detector:
 /gate/OpticalSystem/daughters/name crystal
 /gate/OpticalSystem/daughters/insert cylinder
-/gate/crystal/geometry/setRmin 0 cm
-/gate/crystal/geometry/setRmax 3.175 cm
-/gate/crystal/geometry/setHeight 4 mm
-/gate/crystal/geometry/setPhiStart 0 rad
-/gate/crystal/geometry/setDeltaPhi 6.28 rad
-/gate/crystal/placement/setTranslation 0 0. -3.5 mm
-/gate/crystal/setMaterial BC412
-/gate/crystal/vis/setColor red
+/gate/crystal/geometry/setRmin 0 mm
+/gate/crystal/geometry/setRmax .25 mm
+/gate/crystal/geometry/setHeight .1 mm
+/gate/crystal/placement/setTranslation 0 0 -2.05 mm
+/gate/crystal/setMaterial SiO2
+/gate/crystal/vis/setColor blue
 /gate/systems/OpticalSystem/crystal/attach crystal
 
 /gate/crystal/daughters/name pixel
@@ -140,11 +140,12 @@
 #Surfaces
 /gate/pixel/surfaces/name                           	scin-to-opt
 /gate/pixel/surfaces/insert                         	crystal
-/gate/pixel/surfaces/scin-to-opt/setSurface  		    black 
+/gate/pixel/surfaces/scin-to-opt/setSurface  		    perfect_apd
 
 /gate/crystal/surfaces/name                     	    opt-to-scin
 /gate/crystal/surfaces/insert                   	    pixel
-/gate/crystal/surfaces/opt-to-scin/setSurface		    black
+/gate/crystal/surfaces/opt-to-scin/setSurface		    perfect_apd
+
 
 #Actors
 /gate/source/addSource str90hist gps
@@ -169,7 +170,13 @@
 /gate/output/tree/addFileName output/BC412.txt
 /gate/output/tree/hits/enable
 /gate/output/tree/optical/enable
-/gate/output/tree/addCollection Singles
+/gate/output/tree/optical/branches/NumScintillation/disable
+/gate/output/tree/optical/branches/CrystalProcessName/disable
+/gate/output/tree/optical/branches/CrystalLastHitPos_X/disable
+/gate/output/tree/optical/branches/CrystalLastHitPos_Y/disable
+/gate/output/tree/optical/branches/CrystalLastHitPos_Z/disable
+/gate/output/tree/optical/branches/CrystalLastHitEnergy/disable
+#/gate/output/tree/addCollection Singles
 
-/gate/application/setTotalNumberOfPrimaries 100
+/gate/application/setTotalNumberOfPrimaries 10
 /gate/application/start
