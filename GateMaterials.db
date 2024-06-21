@@ -50,6 +50,10 @@ Gold:       S= Au  ; Z= 79  ; A= 197.0   g/mole
 Strontium:  S= Sr  ; Z= 38  ; A=  89.9  g/mole
 
 [Materials]
+SiO2: d=2.2 g/cm3 ; n=2
+        +el: name=Silicon ; n=1
+        +el: name=Oxygen ; n=2
+
 Vacuum: d=0.000001 mg/cm3 ; n=1 
 	+el: name=Hydrogen ; n=1
 
@@ -58,6 +62,7 @@ Strontium-90: d=2.64 g/cm3 ; n=1 ; state=solid
 
 Gold:    d=19.3 g/cm3     ; n=1
     +el: name=auto        ; n=1
+
 Aluminium: d=2.7 g/cm3 ; n=1 ; state=solid
 	+el: name=auto ; n=1
 
@@ -515,3 +520,23 @@ ETape:  d=1.1 g/cm3; n=3
 
 Graphite: d=2.26 g/cm3; n=1
         +el: name=Carbon;       n=1
+
+Anthracene:     d=1.25 g/cm3;   n=2;    state=solid
+        +el: name=Hydrogen;     n= 14
+        +el: name=Carbon;       n= 10
+
+H3BO3: d=1.44 g/cm3; n=3; state=solid
+        +el: name=Hydrogen;     n=3
+        +el: name=Boron;        n=1
+        +el: name=Oxygen;       n=3
+
+Kenji: d=5.6 g/cm3; n=4; state=solid
+        +mat:name=Gd2O3;        f=0.21
+        +mat:name=WO3;          f=0.35
+        +mat:name=H3BO3;        f=0.40
+        +mat:name=Eu2O3;        f=0.04
+
+BC412: d=1.032 g/cm3; n=2; state=solid
+        +el: name=Hydrogen;     f=0.5246
+        +el: name=Carbon;       f=0.4754
+
