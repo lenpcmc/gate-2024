@@ -29,7 +29,7 @@
 /gate/crystal/geometry/setPhiStart 0 rad
 /gate/crystal/geometry/setDeltaPhi 6.28 rad
 /gate/crystal/placement/setTranslation 0 0. -3.5 mm
-/gate/crystal/setMaterial LSO
+/gate/crystal/setMaterial BC412
 /gate/crystal/vis/setColor red
 /gate/systems/OpticalSystem/crystal/attach crystal
 
@@ -160,14 +160,15 @@
 /control/execute visu.mac
 
 #/gate/output/root/enable
-#/gate/output/root/setRootHitFlag            1
-#/gate/output/root/setRootSinglesFlag        1
-#/gate/output/root/setRootNtupleFlag         1
+#/gate/output/root/setRootHitFlag            0
+#/gate/output/root/setRootSinglesFlag        0
+#/gate/output/root/setRootOpticalFlag        1
 #/gate/output/root/setFileName output/BC412ROOT
 
 /gate/output/tree/enable
 /gate/output/tree/addFileName output/BC412.txt
 /gate/output/tree/hits/enable
+/gate/output/tree/optical/enable
 /gate/output/tree/addCollection Singles
 
 /gate/application/setTotalNumberOfPrimaries 100

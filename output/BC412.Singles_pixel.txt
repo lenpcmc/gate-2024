@@ -1,0 +1,1 @@
+#runID,eventID,sourceID,sourcePosX,sourcePosY,sourcePosZ,globalPosX,globalPosY,globalPosZ,headID,crystalID,pixelID,time,energy,comptonPhantom,comptonCrystal,RayleighPhantom,RayleighCrystal,comptVolName,RayleighVolName,rotationAngle,axialPos
