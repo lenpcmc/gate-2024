@@ -19,7 +19,7 @@
 /gate/OpticalSystem/geometry/setPhiStart 0 rad
 /gate/OpticalSystem/geometry/setDeltaPhi 6.28 rad
 /gate/OpticalSystem/placement/setTranslation 0 0. -3.5 mm
-/gate/OpticalSystem/setMaterial BC412
+/gate/OpticalSystem/setMaterial LSO
 /gate/OpticalSystem/vis/setColor red
 
 ### Define pixelated detector:
@@ -89,7 +89,7 @@
 /gate/tef1/placement/setTranslation 0 0 -6.1 mm
 /gate/tef1/placement/setRotationAngle 90 deg
 /gate/tef1/placement/setRotationAxis 0 0 1
-/gate/tef1/setMaterial Aluminium
+/gate/tef1/setMaterial PTFE
 /gate/tef1/vis/setColor white
 
 /gate/world/daughters/name tef2
@@ -100,7 +100,7 @@
 /gate/tef2/placement/setTranslation 0 0 -2.5 mm
 /gate/tef2/placement/setRotationAngle 90 deg
 /gate/tef2/placement/setRotationAxis 0 0 1
-/gate/tef2/setMaterial Aluminium
+/gate/tef2/setMaterial PTFE
 /gate/tef2/vis/setColor white
 
 /gate/world/daughters/name tef3
@@ -111,13 +111,13 @@
 /gate/tef3/placement/setTranslation 0 0 2 mm
 /gate/tef3/placement/setRotationAngle 90 deg
 /gate/tef3/placement/setRotationAxis 0 0 1
-/gate/tef3/setMaterial Aluminium
+/gate/tef3/setMaterial PTFE
 /gate/tef3/vis/setColor white
 
 /gate/actor/addActor DoseActor edepReadout
-/gate/actor/edepReadout/save output/irleDepoutput/BC412eDep.txt
+/gate/actor/edepReadout/save output/irleDepoutput/scintillatortesting.txt
 /gate/actor/edepReadout/stepHitType random
-/gate/actor/edepReadout/attachTo crystal
+/gate/actor/edepReadout/attachTo OpticalSystem
 /gate/actor/edepReadout/setSize 200 200 200 mm
 /gate/actor/edepReadout/setResolution 1 1 1
 /gate/actor/edepReadout/enableDose false
@@ -178,5 +178,5 @@
 /gate/output/tree/optical/branches/CrystalLastHitEnergy/disable
 #/gate/output/tree/addCollection Singles
 
-/gate/application/setTotalNumberOfPrimaries 10
+/gate/application/setTotalNumberOfPrimaries 555000
 /gate/application/start
