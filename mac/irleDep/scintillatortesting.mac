@@ -151,7 +151,7 @@
 /gate/source/addSource str90hist gps
 /gate/source/str90hist/gps/particle e-
 /gate/source/str90hist/gps/energytype UserSpectrum
-/gate/source/str90hist/gps/setSpectrumFile /home/uakgun/src/gate-2024/stront90spectrum.txt
+/gate/source/str90hist/gps/setSpectrumFile ../gate-2024/stront90spectrum.txt
 /gate/source/str90hist/gps/angtype iso
 /gate/source/str90hist/gps/mintheta 0. deg
 /gate/source/str90hist/gps/maxtheta 180. deg
